@@ -28,8 +28,8 @@ export class AdmComponent {
       quantidade: new FormControl('', [Validators.required])
     })
   }
-  get foto() {
-    return this.formPhotos.get('foto')!;
+  get fotoLanche() {
+    return this.formPhotos.get('fotoLanche')!;
   }
   get nome() {
     return this.formCreateLanche.get('nome')!;

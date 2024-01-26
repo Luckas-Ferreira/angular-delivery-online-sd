@@ -1,10 +1,12 @@
 <header class="Header" style="background-color: #f3f2f5;">
     
-    <div class="p-2" style="display: flex;
+    <a href="/inicio">
+      <div class="p-2" style="display: flex;
     justify-content: center;">
         <img src="assets/tercio.png" height="60" alt="">
         <h1 class="mb-0 mt-4">Tércio Delivery</h1>
     </div>
+    </a>
 </header>
 <section class="background" style="background-color: #f3f2f5;">
     <div class="Container">
@@ -15,8 +17,10 @@
             <div class="col-3 m-3 ">
                 <h3><Strong>Opções</Strong></h3>
                 <div class="d-grid gap-2">
-                    <button (click)="adicionarLanche(template)" class="btn btn-secondary">Adicionar lanche</button>
-                    <button class="btn btn-primary">Ver lanche</button>
+                    <button routerLink="pedidos" class="btn btn-secondary">Ver pedidos</button>
+                    <button routerLink="lanches" class="btn btn-secondary">Ver lanche</button>
+                    <button (click)="adicionarLanche(template)" class="btn btn-primary">Adicionar lanche</button>
+                    
                   </div>
             </div>
         </div>
@@ -27,7 +31,7 @@
 <!-- Modal -->
 <ng-template #template style="background-color: white;">
     <form class="needs-validation" novalidate id="bookingForm" (ngSubmit)="depositar()" #formDir="ngForm" [formGroup]="formCreateLanche" enctype="multipart/form-data">
-    <div class="ms-4">
+    <div>
     <div class="modal-header">
       <h2 class="modal-title">Criar lanche</h2>
     </div>
@@ -36,18 +40,19 @@
             <form id="bookingForm" #formDir="ngForm" [formGroup]="formPhotos" enctype="multipart/form-data">
               <label class="form-label mb-0" for="customFile"><span class="fw-bold text-danger">*</span> Anexe a foto do lanche</label>
               <div class="d-grid gap-2">
-                <input class="form-control" type="file" accept="image/png, image/jpeg,.jpg" image-cropper-input formControlName="foto"
-                  id="file-input" (change)="fileChangeEvent($event)" [ngClass]="{'is-invalid': foto.invalid && formDir.submitted, 'is-valid': foto!.valid}"/>
+                <input class="form-control" type="file" accept="image/png, image/jpeg,.jpg" image-cropper-input formControlName="fotoLanche"
+                  id="file-input" (change)="fileChangeEvent($event)" [ngClass]="{'is-invalid': fotoLanche.invalid && formDir.submitted, 'is-valid': fotoLanche!.valid}"/>
               </div>
-            </form>
-            <div *ngIf="foto.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
-              <p *ngIf="foto.errors?.['required']">A foto é obrigatória</p>
+              <div *ngIf="fotoLanche.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
+              <p *ngIf="fotoLanche.errors?.['required']">A foto é obrigatória</p>
             </div>
+            </form>
+            
           </div>
             <div class="row">
                 <div class="col-6">
-                    <div class="p-3 form-group">
-                        <div class="mb-3">
+                    <div class="p-3 form-group pe-0">
+                        <div>
                             <label for="nome"><span class="fw-bold text-danger">*</span> Nome</label>
                             <input type="number" formControlName="nome" class="form-control" [ngClass]="{'is-invalid': nome.invalid && formDir.submitted, 'is-valid': nome.valid}" id="exampleFormControlInput1" placeholder="Nome">
                         </div>
@@ -59,23 +64,29 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="p-3 form-group">
+                    <div class="p-3 form-group ps-0">
                         <div class="">
                             <label for="nome"><span class="fw-bold text-danger">*</span> Quantidade</label>
                             <input type="number" formControlName="nome" class="form-control" [ngClass]="{'is-invalid': nome.invalid && formDir.submitted, 'is-valid': nome.valid}" id="exampleFormControlInput1" placeholder="Quantidade">
                         </div>
                         <div *ngIf="nome.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
                             <p *ngIf="nome.errors?.['required']">
-                              O nome do lanche é obrigatório
+                              A quantidade é obrigatória
                             </p>
                           </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="p-3 pt-0 form-group">
-                        <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricao" [ngClass]="{'is-invalid': descricao.invalid && formDir.submitted, 'is-valid': descricao.valid}"  formControlName="descricao" rows="3"></textarea>
+                        <div *ngIf="descricao.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
+                          <p *ngIf="descricao.errors?.['required']">
+                            A descrição é obrigatória
+                          </p>
+                        </div>
                       </div>
+                      
                 </div>
             </div>
            

@@ -8,15 +8,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DepositoComponent } from './components/pages/deposito/deposito.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowPedidosComponent } from './components/adm/show-pedidos/show-pedidos.component';
+import { AdmModule } from './components/adm/adm.module';
 @NgModule({
   declarations: [
     AppComponent,
-    AdmComponent,
     DepositoComponent,
     ShowPedidosComponent,
   ],
   imports: [
     PagesModule,
+    AdmModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,

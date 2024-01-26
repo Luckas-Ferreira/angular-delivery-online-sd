@@ -16,4 +16,12 @@ export class PagesComponent {
   retirarValor( template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template, this.config)
 }
+
+  deixarFirma(){
+    const alert = document.getElementById('success');
+    alert!.classList.remove('d-none');
+    setTimeout(() => {
+      alert!.classList.add('d-none');
+    }, 7000);
+  }
 }

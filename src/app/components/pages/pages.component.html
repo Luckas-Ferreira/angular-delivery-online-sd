@@ -14,7 +14,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" (click)="retirarValor(template)"><i class="fa-brands fa-pix"></i> Retirar dinheiro</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-person-praying"></i> Deixar de gorjeta </a></li>
+                <li><a class="dropdown-item" (click)="deixarFirma()"><i class="fa-solid fa-person-praying"></i> Deixar de gorjeta </a></li>
               </ul>
         </div>
     </div>
@@ -23,6 +23,11 @@
     <div class="Container">
         <div class="row">
             <div class="col-8">
+                <div class="input-group flex-nowrap shadow bg-body rounded">
+                    <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Username" aria-describedby="addon-wrapping">
+                    <button class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <h3 style="font-weight: 600;" class="text-center mt-2">Lanches</h3>
                 <app-home></app-home>
             </div>
             <div class="col-4">
@@ -32,6 +37,9 @@
     </div>
 </section>
 
+<div class="alert alert-success d-none fixed-bottom text-center" role="alert" id="success">
+    <p class="mb-0"><strong>A firma agradece!</strong></p>
+</div>
 
 <!-- Modal -->
 <ng-template #template>
