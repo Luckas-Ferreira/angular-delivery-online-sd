@@ -41,7 +41,7 @@
   --bs-modal-border-color: none;
   --bs-modal-header-border-color: transparent;
   --bs-modal-footer-border-color: transparent;
-  --bs-body-bg: #ebebeb;
+  --bs-body-bg: #ffffff;
 }
 
 .modal.fade .modal-dialog {

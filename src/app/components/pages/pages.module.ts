@@ -5,7 +5,6 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { HomeComponent } from './home/home.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PagesComponent } from './pages.component';
-import { DepositoComponent } from './deposito/deposito.component';
 
 
 @NgModule({
