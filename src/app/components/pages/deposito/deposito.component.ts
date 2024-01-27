@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Depositar } from 'src/app/interface/Depositar';
+import { MoneyService } from 'src/app/service/money.service';
 
 @Component({
   selector: 'app-deposito',
@@ -9,9 +11,16 @@ import { Router } from '@angular/router';
 })
 export class DepositoComponent implements OnInit{
   formDeposito!: FormGroup
-  constructor(private router: Router){}
+  constructor(private router: Router, private Depositar: MoneyService){}
 
   ngOnInit(): void {
+    this.Depositar.getMoney().subscribe((response: Depositar) => {
+      if(response.ok){
+        this.router.navigateByUrl('/depositar');
+      }else{
+        return
+      }
+    })
     this.formDeposito = new FormGroup({
       valor: new FormControl('', [Validators.required])
     })
