@@ -344,33 +344,18 @@ function CreateLanche($dataf){
     $database->insert('lanche', $data);
     $lanche_id = $database->id();
 
-    $validacoes = [
-        "foto" => ['id' => $lanche_id, 'type' => 'Imagem'],
-    ];
 
-    $fotosBD = [];
+    $arquivo = UploadFile($lanche_id);
 
-    foreach($validacoes as $atrubuto => $argumentos){
-
-        $required = $argumentos['required'] ?? true;
-        unset($argumentos['required']);
-
-        if($required){
-            $arquivo = UploadFile($atrubuto, $argumentos);
-
-            if($arquivo['ok'] === false){
-                return $arquivo;
-            }
-
-            $fotosBD[$atrubuto] = $arquivo;
-        }
+    if($arquivo['ok'] === false){
+        return $arquivo;
     }
 
-    $database->update("lanche", $fotosBD, [
-        "lanche_id" => $lanche_id
-    ]);
+    $url = $arquivo['url'];
+    $database->update("lanche", ['foto' => $url], ["lanche_id" => $lanche_id ]);
 
     return ['ok' => true, 'lanche_id' => $lanche_id];
+
 }
 
 function UploadFile($id){
