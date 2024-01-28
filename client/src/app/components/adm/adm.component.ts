@@ -87,7 +87,7 @@ export class AdmComponent {
 
   fileChangeEvent(event: any): void {
     let file = event.target.files[0];
-    this.formData.append('fotoLanche', file, this.formPhotos.get('fotoLanche')!.value.nome);
+    this.formData.append('foto', file, this.formPhotos.get('fotoLanche')!.value.nome);
   }
   
   adicionarLanche( template: TemplateRef<any>){
