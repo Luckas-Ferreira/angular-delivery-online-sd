@@ -69,6 +69,7 @@ export class HomeComponent implements OnInit{
           alert!.classList.add('d-none');
         }, 4000);
       }
+      this.modalRef.hide();
     })
   }
 
