@@ -266,8 +266,6 @@ function FazerPedido($dataf){
 
 }
 
-
-
 //$rt = DeleteLanche(['lanche_id' =>  3]);
 //echo json_encode($rt);
 
@@ -375,19 +373,16 @@ function UploadFile($id){
         return ['ok' => false, "message" => "O tamanho do arquivo excede o limite permitido.", 'code' => -1];
     }
 
-    $fileInfo = pathinfo($imagem);
-    $extensao = $fileInfo['extension'];
+    $extensao = pathinfo($imagem["name"], PATHINFO_EXTENSION);
 
-    $folderRaiz = "/arquivos";
+    $folderRaiz = "arquivos";
     $file_path = "$folderRaiz/$id.$extensao";
 
-
-   if (!move_uploaded_file($imagem["tmp_name"], $file_path)) {
+    if (!move_uploaded_file($imagem["tmp_name"], $file_path)) {
         return ['ok' => false, "message" => "Erro ao processar o arquivo", 'code' => -1];
     }
 
-  return ['ok' => true, 'url' => "https://robertogram.com.br/terciodelivery/arquivos/$id.$extensao"];
-
+    return ['ok' => true, 'url' => "https://robertogram.com.br/terciodelivery/arquivos/$id.$extensao"];
 }
 
 function validarDados($validacoes, $dataf) {
