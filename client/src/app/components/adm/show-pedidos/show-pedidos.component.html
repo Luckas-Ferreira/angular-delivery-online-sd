@@ -1,49 +1,22 @@
 <div class="Container col-5 shadow p-3 m-3 bg-body rounded" style="width: 400px; min-height: 300px; border-radius: 30px;">
-    <div class="text-center">
-        <h3 class="typography">Pedidos</h3>
-    </div>
-    <div >
-        <hr>
-        <div class="mt-4" style="display: flex; justify-content: space-between;">
-            <p><strong>Nome: </strong>Capetinha</p>
-            <p><strong>Quantidade: </strong>2</p>
+    <div *ngFor="let pedido of dataPedido; let lastPedido = last">
+        <div class="text-center">
+            <h3 class="typography">Pedido</h3>
         </div>
-        <p><strong>Descrição: </strong>Cebola, Alho, Pimenta</p>
-        <div style="display: flex; justify-content: end;">
+        <div *ngFor="let lanche of pedido.lanches; let i = index; let isLast = last">
+            <div class="mt-4" style="display: flex; justify-content: space-between;">
+                <p><strong>Nome: </strong>{{lanche.nome}}</p>
+                <p><strong>Quantidade: </strong>{{lanche.quantDispo}}</p>
+            </div>
+            <p><strong>Descrição: </strong>{{lanche.descricao}}</p>
+            <div *ngIf="!(lastPedido && isLast)" style="
+                border-top-style:dotted;
+                border-top-width: 2px;
+                border-top-color: rgb(77, 77, 77); background-color: transparent;"></div>
+        </div>
+        <div class="mt-4" style="display: flex; justify-content: end;" *ngIf="lastPedido">
             <button class="btn btn-primary btn-sm">Entregar</button>
         </div>
-    </div>
-    <div >
-        <hr>
-        <div class="mt-4" style="display: flex; justify-content: space-between;">
-            <p><strong>Nome: </strong>Capetinha</p>
-            <p><strong>Quantidade: </strong>2</p>
-        </div>
-        <p><strong>Descrição: </strong>Cebola, Alho, Pimenta</p>
-        <div style="display: flex; justify-content: end;">
-            <button class="btn btn-primary btn-sm">Entregar</button>
-        </div>
-    </div>
-    <div >
-        <hr>
-        <div class="mt-4" style="display: flex; justify-content: space-between;">
-            <p><strong>Nome: </strong>Capetinha</p>
-            <p><strong>Quantidade: </strong>2</p>
-        </div>
-        <p><strong>Descrição: </strong>Cebola, Alho, Pimenta</p>
-        <div style="display: flex; justify-content: end;">
-            <button class="btn btn-primary btn-sm">Entregar</button>
-        </div>
-    </div>
-    <div >
-        <hr>
-        <div class="mt-4" style="display: flex; justify-content: space-between;">
-            <p><strong>Nome: </strong>Capetinha</p>
-            <p><strong>Quantidade: </strong>2</p>
-        </div>
-        <p><strong>Descrição: </strong>Cebola, Alho, Pimenta</p>
-        <div style="display: flex; justify-content: end;">
-            <button class="btn btn-primary btn-sm">Entregar</button>
-        </div>
+        <hr *ngIf="!lastPedido">
     </div>
 </div>

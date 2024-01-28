@@ -1,11 +1,12 @@
 export interface Lanche {
-    lanche: any;
+    lanches: any;
     ok: boolean;
     message?: string;
-    id: number;
+    lanche_id: number;
     nome: string;
-    valor: string;
+    valor: number;
     descricao: string;
     quantDispo: number;
+    quantSelect: number;
     foto: string;
 }

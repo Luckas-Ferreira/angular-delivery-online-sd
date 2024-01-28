@@ -30,7 +30,7 @@
 
 <!-- Modal -->
 <ng-template #template style="background-color: white;">
-    <form class="needs-validation" novalidate id="bookingForm" (ngSubmit)="depositar()" #formDir="ngForm" [formGroup]="formCreateLanche" enctype="multipart/form-data">
+    <form class="needs-validation" novalidate id="bookingForm" (ngSubmit)="advanceApi(debbug)" #formDir="ngForm" [formGroup]="formCreateLanche" enctype="multipart/form-data">
     <div>
     <div class="modal-header">
       <h2 class="modal-title">Criar lanche</h2>
@@ -51,7 +51,7 @@
           </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="p-3 form-group pe-0">
+                    <div class="p-3 form-group">
                         <div>
                             <label for="nome"><span class="fw-bold text-danger">*</span> Nome</label>
                             <input type="text" formControlName="nome" class="form-control" [ngClass]="{'is-invalid': nome.invalid && formDir.submitted, 'is-valid': nome.valid}" id="exampleFormControlInput1" placeholder="Nome">
@@ -106,8 +106,90 @@
     </div>
     <div class="modal-footer justify-content-end me-3">
       <button type="button" class="btn btn-danger me-3" style="min-width: 20%;" (click)="modalRef.hide()">Cancelar</button>
-      <button type="submit" id="remover" class="btn btn-primary" style="min-width: 20%;">Adicionar</button>
+      <button *ngIf="spinner; else noSpinner" type="submit" id="remover" class="btn btn-primary" style="min-width: 20%;">Adicionar</button>
+      <ng-template #noSpinner>
+        <button class="btn btn-primary" type="button" style="min-width: 20%;" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Aguarde...
+        </button>
+      </ng-template>
     </div>
   </div>
 </form>
   </ng-template>
+
+
+  <div class="alert alert-success d-none fixed-bottom text-center" role="alert" id="Success">
+    <p class="mb-0"><strong>{{fraseAlert}}</strong></p>
+  </div>
+
+  <div class="alert alert-danger d-none fixed-bottom text-center" role="alert" id="error">
+    <p class="mb-0"><strong>{{fraseAlert}}</strong></p>
+  </div>
+
+
+<!-- Modal -->
+<ng-template #debbug>
+  <div class="ms-4">
+    <div class="modal-content" data-bs-backdrop="static">
+      <div class="modal-header">
+        <h2 class="modal-title">Headers</h2>
+      </div>
+      <div class="modal-body pt-0">
+          <p><strong>authority:</strong> terciodelivery.robertogram.com.br</p>
+          <p><strong>method:</strong> POST</p>
+          <p><strong>path:</strong> /CreateLanche</p>
+          <p><strong>Accept:</strong> application/json, text/plain, */*</p>
+      </div>
+      <div class="modal-header pt-1">
+          <h2 class="modal-title">Payload</h2>
+        </div>
+        <div class="modal-body pt-0">
+          <p ps-1><strong>Form Data</strong></p>
+          <div class="codigo">
+              <strong class="identacao">foto:</strong> (binary) <br>
+              <strong class="identacao">nome:</strong> {{formCreateLanche.get('nome')!.value}} <br>
+              <strong class="identacao">descricao:</strong> {{formCreateLanche.get('descricao')!.value}} <br>
+              <strong class="identacao">valor: </strong> {{formCreateLanche.get('valor')!.value}} <br>
+              <strong class="identacao">quantDispo:</strong> {{formCreateLanche.get('quantDispo')!.value}} <br>
+          </div>
+        </div>
+      <div class="modal-footer d-flex justify-content-end">
+          <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="createLanche()">Continuar</button>
+      </div>
+    </div>
+</div>
+</ng-template>
+
+<!-- Modal -->
+<ng-template #debbugShowLanche>
+  <div class="ms-4">
+    <div class="modal-content" data-bs-backdrop="static">
+      <div class="modal-header">
+        <h2 class="modal-title">Headers</h2>
+      </div>
+      <div class="modal-body pt-0">
+          <p><strong>authority:</strong> terciodelivery.robertogram.com.br</p>
+          <p><strong>method:</strong> POST</p>
+          <p><strong>path:</strong> /CreateLanche</p>
+          <p><strong>Accept:</strong> application/json, text/plain, */*</p>
+      </div>
+      <div class="modal-header pt-1">
+          <h2 class="modal-title">Payload</h2>
+        </div>
+        <div class="modal-body pt-0">
+          <p ps-1><strong>Form Data</strong></p>
+          <div class="codigo">
+              <strong class="identacao">foto:</strong> (binary) <br>
+              <strong class="identacao">nome:</strong> {{formCreateLanche.get('nome')!.value}} <br>
+              <strong class="identacao">descricao:</strong> {{formCreateLanche.get('descricao')!.value}} <br>
+              <strong class="identacao">valor: </strong> {{formCreateLanche.get('valor')!.value}} <br>
+              <strong class="identacao">quantDispo:</strong> {{formCreateLanche.get('quantDispo')!.value}} <br>
+          </div>
+        </div>
+      <div class="modal-footer d-flex justify-content-end">
+          <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="createLanche()">Continuar</button>
+      </div>
+    </div>
+</div>
+</ng-template>

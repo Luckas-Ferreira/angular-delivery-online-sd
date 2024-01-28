@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
@@ -11,15 +11,21 @@ import { LancheService } from 'src/app/service/lanche.service';
   styleUrls: ['./adm.component.css']
 })
 export class AdmComponent {
+  fraseAlert: string = '';
+  modalRef!: BsModalRef;
+  @ViewChild('debbug') debbug!: TemplateRef<any>;
+  spinner: boolean = true;
   formCreateLanche!: FormGroup
   formPhotos!: FormGroup
-  modalRef!: BsModalRef;
   formData = new FormData();
   config: ModalOptions = {
     class: 'modal-dialog-centered'
   }
+  config2 = {
+    class: 'modal-dialog-centered',
+    backdrop: 'static' as 'static'
+  }
   constructor(
-    private router: Router, 
     private modalService: BsModalService,
     private lanche: LancheService){}
 
@@ -58,28 +64,36 @@ export class AdmComponent {
       this.formCreateLanche.get('valor')!.invalid ||
       this.formCreateLanche.get('quantidade')!.invalid
     ) {
-      console.log(this.formCreateLanche.get('nome')!.invalid,
-      this.formPhotos.get('fotoLanche')!.invalid,
-      this.formCreateLanche.get('descricao')!.invalid,
-      this.formCreateLanche.get('valor')!.invalid,
-      this.formCreateLanche.get('quantidade')!.invalid)
       return false;
     }
     this.formData.append('nome', this.formCreateLanche.get('nome')!.value);
     this.formData.append('descricao', this.formCreateLanche.get('descricao')!.value);
     this.formData.append('valor', this.formCreateLanche.get('valor')!.value);
-    this.formData.append('quantidade', this.formCreateLanche.get('quantidade')!.value);
+    this.formData.append('quantDispo', this.formCreateLanche.get('quantidade')!.value);
     return true;
   }
-  depositar(){
+  createLanche(){
     if(this.validateRegister()){
-
+      this.spinner = false;
       this.lanche.createLanche(this.formData).subscribe((Response: Lanche) => {
         if(Response.ok){
-          
+          this.fraseAlert = 'Lanche adicionado com sucesso'!;
+          const alert = document.getElementById('Success');
+          alert!.classList.remove('d-none');
+          setTimeout(() => {
+            alert!.classList.add('d-none');
+          window.location.reload();
+          }, 2000);
         }else{
-          
+          this.fraseAlert = Response.message!;
+          const alert = document.getElementById('error');
+          alert!.classList.remove('d-none');
+          setTimeout(() => {
+            alert!.classList.add('d-none');
+          }, 4000);
         }
+        this.spinner = true;
+        this.modalRef.hide();
       })
     }
     
@@ -92,6 +106,15 @@ export class AdmComponent {
   
   adicionarLanche( template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template, this.config)
+}
+
+advanceApi(template: TemplateRef<any>) {
+  if(this.validateRegister()){
+    this.modalRef.hide();
+    setTimeout(() => {
+      this.modalRef = this.modalService.show(template, this.config2);
+    }, 1000);
+  }
 }
 
 }

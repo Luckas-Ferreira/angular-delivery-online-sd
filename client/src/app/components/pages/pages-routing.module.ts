@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PagesComponent, 
     children: [
       { path: 'inicio',component: HomeComponent},
-      
+      { path: '', redirectTo: 'inicio', pathMatch: 'prefix'}
     ]
     }
 ];

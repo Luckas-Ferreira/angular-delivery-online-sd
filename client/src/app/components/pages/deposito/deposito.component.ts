@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Depositar } from 'src/app/interface/Depositar';
 import { MoneyService } from 'src/app/service/money.service';
 
@@ -10,9 +11,15 @@ import { MoneyService } from 'src/app/service/money.service';
   styleUrls: ['./deposito.component.css']
 })
 export class DepositoComponent implements OnInit{
+  @ViewChild('debbug') debbug!: TemplateRef<any>;
   formDeposito!: FormGroup;
+  modalRef!: BsModalRef;
   fraseAlert: string = '';
-  constructor(private router: Router, private Depositar: MoneyService){}
+  config = {
+    class: 'modal-dialog-centered',
+    backdrop: 'static' as 'static'
+  }
+  constructor(private router: Router, private Depositar: MoneyService, private modalService: BsModalService){}
 
   ngOnInit(): void {
     this.Depositar.getMoney().subscribe((response: Depositar) => {
@@ -29,6 +36,7 @@ export class DepositoComponent implements OnInit{
   }
 
   depositar(){
+    this.modalRef.hide();
     if(this.formDeposito.get('valor')!.valid){
       this.Depositar.depositarMoney({valor: this.formDeposito.get('valor')!.value}).subscribe((response: Depositar) => {
         if(response.ok){
@@ -42,6 +50,12 @@ export class DepositoComponent implements OnInit{
           }, 7000);
         }
       })
+    }
+  }
+
+  advanceApi(template: TemplateRef<any>) {
+    if(this.formDeposito.get('valor')!.valid){
+      this.modalRef = this.modalService.show(template, this.config);
     }
   }
 }

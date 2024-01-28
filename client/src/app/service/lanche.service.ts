@@ -28,7 +28,7 @@ export class LancheService {
   updateLanche(object: object): Observable<any>{
     return this.http.post<any>(this.UpdateLanche, object)
   }
-  deleteLanche(id: number): Observable<any>{
-    return this.http.post<any>(this.DeleteLanche, id)
+  deleteLanche(object: object): Observable<any>{
+    return this.http.post<any>(this.DeleteLanche, object)
   }
 }

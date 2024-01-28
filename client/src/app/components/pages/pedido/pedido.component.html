@@ -1,36 +1,78 @@
 <section class="shadow p-3 mb-5 bg-body" style="background-color: white; border-radius: 30px;">
     <div>
-        <h3>Pedidos</h3>
+        <h3>Pedido</h3>
     </div>
-    <div *ngFor="let pedido of dataPedido" class="row">
-        <div class="col-3">
-            <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
-            <div class="bg-white p-2" style="border-radius: 10px;">
+    <div *ngFor="let lanche of dataLanche" class="row">
+        <div *ngIf="lanche.quantDispo > 0" class="col-12">
+           <div class="row">
+            <div class="col-3">
+                <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
+                <div class="bg-white p-2" style="border-radius: 10px;">
+                </div>
             </div>
-        </div>
-        <div class="col-6 p-0">
-            <p class="m-0"><strong  style="font-size: 14px;">Nome do lanche</strong></p>
-            <p >2 disponiveis</p>
-        </div>
-        <div class="col-3">
-            <div style="display: flex; justify-content: space-between;" class="mt-1">
-                <strong>R$ Valor</strong>
+            <div class="col-6 p-0">
+                <p class="m-0"><strong  style="font-size: 14px;">{{lanche.nome}}</strong></p>
+                <p >{{lanche.quantSelect}} selecionado</p>
             </div>
+            <div class="col-3">
+                <div style="display: flex; justify-content: space-between;" class="mt-1">
+                    <strong>R${{lanche.valor}} Valor</strong>
+                </div>
+            </div>
+           </div>
+           <hr>
         </div>
-        <hr>
-
     </div>
     <div style="background-color: white;">
         <div class="mt-4" style="display: flex; justify-content: space-between;">
             <p class="typography">Subtotal</p>
-            <p class="typography">R$300.00</p>
+            <p class="typography">R${{total || 0}}.00</p>
         </div>
         <div class="mt-2" style="display: flex; justify-content: space-between;">
             <p class="typography">Total</p>
-            <p class="typography">R$300.00</p>
+            <p class="typography">R${{total || 0}}.00</p>
         </div>
         <div class="mt-3">
-            <button type="button" class="btn btn-dark" style="border-radius: 15px; width: 100%;">Fazer pedido</button>
+            <button type="button" (click)="advanceApi(debbug)" class="btn btn-dark" style="border-radius: 15px; width: 100%;">Fazer pedido</button>
         </div>
     </div>
 </section>
+
+<div class="alert alert-danger d-none fixed-bottom text-center" role="alert" id="Error">
+    <p class="mb-0"><strong>{{fraseAlert}}</strong></p>
+</div>
+<div class="alert alert-success d-none fixed-bottom text-center" role="alert" id="Success">
+    <p class="mb-0"><strong>Pedido realizado com sucesso!</strong></p>
+</div>
+
+
+<!-- Modal -->
+<ng-template #debbug>
+    <div class="ms-4">
+      <div class="modal-content" data-bs-backdrop="static">
+        <div class="modal-header">
+          <h2 class="modal-title">Headers</h2>
+        </div>
+        <div class="modal-body pt-0">
+            <p><strong>authority:</strong> terciodelivery.robertogram.com.br</p>
+            <p><strong>method:</strong> POST</p>
+            <p><strong>path:</strong> /CreateLanche</p>
+            <p><strong>Accept:</strong> application/json, text/plain, */*</p>
+        </div>
+        <div class="modal-header pt-1">
+            <h2 class="modal-title">Payload</h2>
+          </div>
+          <div class="modal-body pt-0">
+            <p ps-1><strong>Form Data</strong></p>
+            <div  class="codigo">
+                lanches: [
+                <p *ngFor="let pedido of dataLanche" class="identacao">"{{ '{' }}lanche_id: {{pedido.lanche_id}} , quantSelect: {{pedido.quantSelect}} {{ '}' }}"</p>
+                ]
+            </div>
+          </div>
+        <div class="modal-footer d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="fazerPedido()">Continuar</button>
+        </div>
+      </div>
+  </div>
+  </ng-template>

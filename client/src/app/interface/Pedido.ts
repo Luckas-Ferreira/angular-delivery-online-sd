@@ -1,12 +1,15 @@
 export interface Pedido {
-    ok: boolean;
+    ok?: boolean;
     message?: string;
     nome: string;
     descricao: string;
     quantDispo: number;
-    pedidos: any;
-    pedido: {
-        id: number, 
-        quantDispo: number
-    }
+    pedidos: {
+        lanches: [
+            {
+                nome: string;
+                descricao: string;
+                quantDispo: number;}
+        ]
+    };
 }

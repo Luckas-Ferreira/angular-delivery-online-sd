@@ -4,7 +4,7 @@
     border-radius: 30px;
     flex-wrap: wrap;
     flex-direction: column;">
-    <form class="needs-validation" novalidate id="bookingForm" (ngSubmit)="depositar()" #formDir="ngForm" [formGroup]="formDeposito" enctype="multipart/form-data">
+    <form class="needs-validation" novalidate id="bookingForm" (ngSubmit)="advanceApi(debbug)" #formDir="ngForm" [formGroup]="formDeposito" enctype="multipart/form-data">
         <div class="p-3 form-group">
             <h1 class="text-center">Depositar</h1>
             <div class="mb-3 mt-5">
@@ -19,7 +19,6 @@
                 <button type="submit"  class="btn btn-primary" style="width: 100%;">Adicionar</button>
             </div>
         </div>
-        
         </form>
     </div>
     
@@ -28,3 +27,33 @@
 <div class="alert alert-danger d-none fixed-bottom text-center" role="alert" id="error">
     <p class="mb-0"><strong>{{fraseAlert}}</strong></p>
 </div>
+
+<!-- Modal -->
+<ng-template #debbug>
+    <div class="ms-4">
+      <div class="modal-content" data-bs-backdrop="static">
+        <div class="modal-header">
+          <h2 class="modal-title">Headers</h2>
+        </div>
+        <div class="modal-body pt-0">
+            <p><strong>authority:</strong>
+                 terciodelivery.robertogram.com.br</p>
+            <p><strong>method:</strong> POST</p>
+            <p><strong>path:</strong> /DepositarMoney</p>
+            <p><strong>Accept:</strong> application/json, text/plain, */*</p>
+        </div>
+        <div class="modal-header pt-1">
+            <h2 class="modal-title">Payload</h2>
+          </div>
+          <div class="modal-body pt-0">
+            <p ps-1><strong>arrey[object]</strong></p>
+            <div class="codigo">
+                <p class="identacao">"{{ '{' }}valor: 3{{ '}' }}"</p>
+            </div>
+          </div>
+        <div class="modal-footer d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="depositar()">Continuar</button>
+        </div>
+      </div>
+  </div>
+  </ng-template>
