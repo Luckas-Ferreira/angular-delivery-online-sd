@@ -50,8 +50,8 @@ if (empty($parametros)) {
 $method = $parametros[0];
 
 $permissoes = [
-    "comprador" => ['DepositarMoney', 'GetMoney', 'RetirarMoney', 'GetLanche', 'CreatePrefeitura','GetLanches', 'FazerPedido'],
-    "Vendedor" => ['CreateLanche','UpdateLanche', 'DeleteLanche', 'DeletePrefeitura', 'GetPedidos'],
+    "comprador" => ['DepositarMoney', 'GetMoney', 'RetirarMoney', 'GetLanche','GetLanches', 'FazerPedido'],
+    "Vendedor" => ['CreateLanche','UpdateLanche', 'DeleteLanche', 'GetPedidos'],
 ];
 
 define('CLIENTE_ID', 1);
@@ -266,8 +266,6 @@ function FazerPedido($dataf){
 
 }
 
-
-
 //$rt = DeleteLanche(['lanche_id' =>  3]);
 //echo json_encode($rt);
 
@@ -303,16 +301,18 @@ function GetPedidos(){
 
     $pedidos_ids = $database->select("pedidos", "pedido_id");
     $pedidos = [];
+
     foreach($pedidos_ids as $pedido_id){
         $lanches_ids = $database->select("pedido_lanches", "lanche_id", ['pedido_id' => $pedido_id]);
         $pedido = [];
         $lanches = [];
-        array_push($pedido, ['pedido_id' => $pedido_id]);
+        $pedido['pedido_id'] = $pedido_id;
         foreach($lanches_ids as $lanche_id){
             $lanche = $database->get("lanche", "*", ['lanche_id' => $lanche_id]);
             array_push($lanches, $lanche);
         }
-        $pedidos['lanches'] = $lanches;
+        $pedido['lanches'] = $lanches;
+        array_push($pedidos, $pedido);
     }
 
     return ['ok' => true, 'pedidos' => $pedidos];
@@ -375,19 +375,16 @@ function UploadFile($id){
         return ['ok' => false, "message" => "O tamanho do arquivo excede o limite permitido.", 'code' => -1];
     }
 
-    $fileInfo = pathinfo($imagem);
-    $extensao = $fileInfo['extension'];
+    $extensao = pathinfo($imagem["name"], PATHINFO_EXTENSION);
 
-    $folderRaiz = "/arquivos";
+    $folderRaiz = "arquivos";
     $file_path = "$folderRaiz/$id.$extensao";
 
-
-   if (!move_uploaded_file($imagem["tmp_name"], $file_path)) {
+    if (!move_uploaded_file($imagem["tmp_name"], $file_path)) {
         return ['ok' => false, "message" => "Erro ao processar o arquivo", 'code' => -1];
     }
 
-  return ['ok' => true, 'url' => "https://robertogram.com.br/terciodelivery/arquivos/$id.$extensao"];
-
+    return ['ok' => true, 'url' => "https://terciodelivery.robertogram.com.br/arquivos/$id.$extensao"];
 }
 
 function validarDados($validacoes, $dataf) {
