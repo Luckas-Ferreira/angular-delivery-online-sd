@@ -382,7 +382,7 @@ function UploadFile($id){
         return ['ok' => false, "message" => "Erro ao processar o arquivo", 'code' => -1];
     }
 
-    return ['ok' => true, 'url' => "https://robertogram.com.br/terciodelivery/arquivos/$id.$extensao"];
+    return ['ok' => true, 'url' => "https://terciodelivery.robertogram.com.br/arquivos/$id.$extensao"];
 }
 
 function validarDados($validacoes, $dataf) {
