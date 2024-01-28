@@ -50,8 +50,8 @@ if (empty($parametros)) {
 $method = $parametros[0];
 
 $permissoes = [
-    "comprador" => ['DepositarMoney', 'GetMoney', 'RetirarMoney', 'GetLanche', 'CreatePrefeitura','GetLanches', 'FazerPedido'],
-    "Vendedor" => ['CreateLanche','UpdateLanche', 'DeleteLanche', 'DeletePrefeitura', 'GetPedidos'],
+    "comprador" => ['DepositarMoney', 'GetMoney', 'RetirarMoney', 'GetLanche','GetLanches', 'FazerPedido'],
+    "Vendedor" => ['CreateLanche','UpdateLanche', 'DeleteLanche', 'GetPedidos'],
 ];
 
 define('CLIENTE_ID', 1);
