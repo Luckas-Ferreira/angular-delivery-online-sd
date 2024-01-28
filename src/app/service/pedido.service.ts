@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class VendedorService {
+export class PedidoService {
 
   private GetPedido = pedido.getPedidos;
   private FazerPedido = pedido.fazerPedido;

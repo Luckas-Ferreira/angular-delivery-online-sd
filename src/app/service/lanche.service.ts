@@ -22,8 +22,8 @@ export class LancheService {
   getLanches(): Observable<any>{
     return this.http.post<any>(this.GetLanches, [])
   }
-  createLanche(object: object): Observable<any>{
-    return this.http.post<any>(this.CreateLanche, object)
+  createLanche(data: FormData): Observable<any>{
+    return this.http.post<any>(this.CreateLanche, data)
   }
   updateLanche(object: object): Observable<any>{
     return this.http.post<any>(this.UpdateLanche, object)

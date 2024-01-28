@@ -2,6 +2,8 @@ import { Component, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { Lanche } from 'src/app/interface/Lanche';
+import { LancheService } from 'src/app/service/lanche.service';
 
 @Component({
   selector: 'app-adm',
@@ -12,10 +14,14 @@ export class AdmComponent {
   formCreateLanche!: FormGroup
   formPhotos!: FormGroup
   modalRef!: BsModalRef;
+  formData = new FormData();
   config: ModalOptions = {
     class: 'modal-dialog-centered'
   }
-  constructor(private router: Router, private modalService: BsModalService){}
+  constructor(
+    private router: Router, 
+    private modalService: BsModalService,
+    private lanche: LancheService){}
 
   ngOnInit(): void {
     this.formPhotos = new FormGroup({
@@ -46,32 +52,44 @@ export class AdmComponent {
 
   validateRegister() {
     if (
-      this.formCreateLanche.get('nome')!.invalid
+      this.formCreateLanche.get('nome')!.invalid ||
+      this.formPhotos.get('fotoLanche')!.invalid ||
+      this.formCreateLanche.get('descricao')!.invalid ||
+      this.formCreateLanche.get('valor')!.invalid ||
+      this.formCreateLanche.get('quantidade')!.invalid
     ) {
+      console.log(this.formCreateLanche.get('nome')!.invalid,
+      this.formPhotos.get('fotoLanche')!.invalid,
+      this.formCreateLanche.get('descricao')!.invalid,
+      this.formCreateLanche.get('valor')!.invalid,
+      this.formCreateLanche.get('quantidade')!.invalid)
       return false;
     }
+    this.formData.append('nome', this.formCreateLanche.get('nome')!.value);
+    this.formData.append('descricao', this.formCreateLanche.get('descricao')!.value);
+    this.formData.append('valor', this.formCreateLanche.get('valor')!.value);
+    this.formData.append('quantidade', this.formCreateLanche.get('quantidade')!.value);
     return true;
   }
   depositar(){
     if(this.validateRegister()){
-      this.router.navigateByUrl('inicio')
+
+      this.lanche.createLanche(this.formData).subscribe((Response: Lanche) => {
+        if(Response.ok){
+          
+        }else{
+          
+        }
+      })
     }
     
   }
 
   fileChangeEvent(event: any): void {
-    // this.currentInput = event.target;
-    // if (this.addImageValidation(event)) {
-    //   this.showImage(this.img);
-    //   this.imageChangedEvent = event;
-    // }else {
-    //   this.formPhotos.get('foto')!.reset();
-    //   this.formRegister.get('foto')!.reset();
-    //   event.target.value = '';
-    //   this.imageVerification(this.modal)
-    // }
+    let file = event.target.files[0];
+    this.formData.append('fotoLanche', file, this.formPhotos.get('fotoLanche')!.value.nome);
   }
-
+  
   adicionarLanche( template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template, this.config)
 }

@@ -10,15 +10,14 @@ import { MoneyService } from 'src/app/service/money.service';
   styleUrls: ['./deposito.component.css']
 })
 export class DepositoComponent implements OnInit{
-  formDeposito!: FormGroup
+  formDeposito!: FormGroup;
+  fraseAlert: string = '';
   constructor(private router: Router, private Depositar: MoneyService){}
 
   ngOnInit(): void {
     this.Depositar.getMoney().subscribe((response: Depositar) => {
       if(response.ok){
-        this.router.navigateByUrl('/depositar');
-      }else{
-        return
+        this.router.navigateByUrl('/inicio');
       }
     })
     this.formDeposito = new FormGroup({
@@ -31,9 +30,18 @@ export class DepositoComponent implements OnInit{
 
   depositar(){
     if(this.formDeposito.get('valor')!.valid){
-      this.router.navigateByUrl('inicio')
+      this.Depositar.depositarMoney({valor: this.formDeposito.get('valor')!.value}).subscribe((response: Depositar) => {
+        if(response.ok){
+          this.router.navigateByUrl('inicio')
+        }else{
+          this.fraseAlert = response.message!;
+          const alert = document.getElementById('error');
+          alert!.classList.remove('d-none');
+          setTimeout(() => {
+            alert!.classList.add('d-none');
+          }, 7000);
+        }
+      })
     }
-    
   }
-
 }

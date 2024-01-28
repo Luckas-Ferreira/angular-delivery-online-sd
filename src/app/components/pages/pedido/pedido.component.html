@@ -2,7 +2,7 @@
     <div>
         <h3>Pedidos</h3>
     </div>
-    <div class="row">
+    <div *ngFor="let pedido of dataPedido" class="row">
         <div class="col-3">
             <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
             <div class="bg-white p-2" style="border-radius: 10px;">

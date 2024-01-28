@@ -13,11 +13,11 @@ export class MoneyService {
 
   constructor(private http: HttpClient) { }
 
-  depositarMoney(valor: string): Observable<any>{
-    return this.http.post<any>(this.DepositarMoney, valor)
+  depositarMoney(object: object): Observable<any>{
+    return this.http.post<any>(this.DepositarMoney, object)
   }
-  retirarMoney(valor: string): Observable<any>{
-    return this.http.post<any>(this.RetirarMoney, valor)
+  retirarMoney(object: object): Observable<any>{
+    return this.http.post<any>(this.RetirarMoney, object)
   }
   getMoney(): Observable<any>{
     return this.http.post<any>(this.GetMoney, [])

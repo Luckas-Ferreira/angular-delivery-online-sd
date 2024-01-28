@@ -1,56 +1,37 @@
 <section>
-        <div style="min-height: 600px;">
-           
-            <div class="row justify-content-center">
-                <div class="col-5 shadow p-3 m-1 m-1 m-sm-3 bg-body rounded">
+        <div style="min-height: 500px;">
+            <div *ngIf="dataLanche.length > 0; else noLanche" class="row justify-content-center">
+                <!-- <div class=" col-5 shadow p-3 m-1 m-sm-3 bg-body rounded">
+                    <div class="bg-white p-2 " style="border-radius: 10px;">
+                        <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
+                        <div style="display: flex; justify-content: space-between;" class="mt-1">
+                            <p><strong style="font-size: 14px;">Nome do lanche</strong></p>
+                            <strong>R$ Valor</strong>
+                        </div>
+                        <div>
+                            <p class="tipography text-center">2 disponiveis <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template)"><i class="fa-solid fa-plus fa-xl"></i></button></p>
+                        </div>
+                    </div>
+                </div> -->
+                <div *ngFor="let lanche of dataLanche" class="col-5 shadow p-3 m-1 m-1 m-sm-3 bg-body rounded">
                     <div class="bg-white p-2" style="border-radius: 10px;">
                         <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
                         <div style="display: flex; justify-content: space-between;" class="mt-1">
-                            <p><strong style="font-size: 14px;">Nome do lanche</strong></p>
-                            <strong>R$ Valor</strong>
+                            <p><strong style="font-size: 14px;">{{lanche.nome}}</strong></p>
+                            <strong>R$ {{lanche.valor}}</strong>
                         </div>
                         <div>
-                            <p class="tipography text-center">2 disponiveis <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template)"><i class="fa-solid fa-plus fa-xl"></i></button></p>
+                            <p class="tipography text-center">{{lanche.quantDispo}} disponiveis <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template)"><i class="fa-solid fa-plus fa-xl"></i></button></p>
                         </div>
                     </div>
                 </div>                
-                <div class=" col-5 shadow p-3 m-1 m-sm-3 bg-body rounded">
-                    <div class="bg-white p-2 " style="border-radius: 10px;">
-                        <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
-                        <div style="display: flex; justify-content: space-between;" class="mt-1">
-                            <p><strong style="font-size: 14px;">Nome do lanche</strong></p>
-                            <strong>R$ Valor</strong>
-                        </div>
-                        <div>
-                            <p class="tipography text-center">2 disponiveis <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template)"><i class="fa-solid fa-plus fa-xl"></i></button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-5 shadow p-3 m-1 m-sm-3 bg-body rounded">
-                    <div class="bg-white p-2 " style="border-radius: 10px;">
-                        <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
-                        <div style="display: flex; justify-content: space-between;" class="mt-1">
-                            <p><strong style="font-size: 14px;">Nome do lanche</strong></p>
-                            <strong>R$ Valor</strong>
-                        </div>
-                        <div>
-                            <p class="tipography text-center">2 disponiveis <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template)"><i class="fa-solid fa-plus fa-xl"></i></button></p>
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-5 shadow p-3 m-1 m-sm-3 bg-body rounded">
-                    <div class="bg-white p-2 " style="border-radius: 10px;">
-                        <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
-                        <div style="display: flex; justify-content: space-between;" class="mt-1">
-                            <p><strong style="font-size: 14px;">Nome do lanche</strong></p>
-                            <strong>R$ Valor</strong>
-                        </div>
-                        <div>
-                            <p class="tipography text-center">2 disponiveis <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template)"><i class="fa-solid fa-plus fa-xl"></i></button></p>
-                        </div>
-                    </div>
-                </div>
             </div>
+            <ng-template #noLanche>
+                <div class="mt-4 text-center">
+                    <h4><strong>Nenhum lanche disponível</strong></h4>
+                </div>
+                
+            </ng-template>
         </div>
 </section>
 

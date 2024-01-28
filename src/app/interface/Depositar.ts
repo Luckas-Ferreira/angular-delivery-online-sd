@@ -2,6 +2,6 @@ export interface Depositar {
     ok: boolean;
     message?: string;
     id: number;
-    valor: string;
+    saldo: string;
     pix?: string;
 }

@@ -9,6 +9,7 @@ import { DepositoComponent } from './components/pages/deposito/deposito.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowPedidosComponent } from './components/adm/show-pedidos/show-pedidos.component';
 import { AdmModule } from './components/adm/adm.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,7 @@ import { AdmModule } from './components/adm/adm.module';
     PagesModule,
     AdmModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,

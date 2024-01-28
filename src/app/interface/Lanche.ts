@@ -1,4 +1,5 @@
 export interface Lanche {
+    lanche: any;
     ok: boolean;
     message?: string;
     id: number;

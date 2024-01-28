@@ -38,10 +38,10 @@
     <div class="modal-body pt-0">
         <div class=" p-3 col-12">
             <form id="bookingForm" #formDir="ngForm" [formGroup]="formPhotos" enctype="multipart/form-data">
-              <label class="form-label mb-0" for="customFile"><span class="fw-bold text-danger">*</span> Anexe a foto do lanche</label>
+              <label class="form-label mb-0" for="fotoLanche"><span class="fw-bold text-danger">*</span> Anexe a foto do lanche</label>
               <div class="d-grid gap-2">
                 <input class="form-control" type="file" accept="image/png, image/jpeg,.jpg" image-cropper-input formControlName="fotoLanche"
-                  id="file-input" (change)="fileChangeEvent($event)" [ngClass]="{'is-invalid': fotoLanche.invalid && formDir.submitted, 'is-valid': fotoLanche!.valid}"/>
+                  id="file-input" formControlName="fotoLanche" (change)="fileChangeEvent($event)" [ngClass]="{'is-invalid': fotoLanche.invalid && formDir.submitted, 'is-valid': fotoLanche!.valid}"/>
               </div>
               <div *ngIf="fotoLanche.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
               <p *ngIf="fotoLanche.errors?.['required']">A foto é obrigatória</p>
@@ -50,11 +50,11 @@
             
           </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="p-3 form-group pe-0">
                         <div>
                             <label for="nome"><span class="fw-bold text-danger">*</span> Nome</label>
-                            <input type="number" formControlName="nome" class="form-control" [ngClass]="{'is-invalid': nome.invalid && formDir.submitted, 'is-valid': nome.valid}" id="exampleFormControlInput1" placeholder="Nome">
+                            <input type="text" formControlName="nome" class="form-control" [ngClass]="{'is-invalid': nome.invalid && formDir.submitted, 'is-valid': nome.valid}" id="exampleFormControlInput1" placeholder="Nome">
                         </div>
                         <div *ngIf="nome.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
                             <p *ngIf="nome.errors?.['required']">
@@ -64,18 +64,31 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="p-3 form-group ps-0">
+                    <div class="p-3 form-group pe-0">
                         <div class="">
-                            <label for="nome"><span class="fw-bold text-danger">*</span> Quantidade</label>
-                            <input type="number" formControlName="nome" class="form-control" [ngClass]="{'is-invalid': nome.invalid && formDir.submitted, 'is-valid': nome.valid}" id="exampleFormControlInput1" placeholder="Quantidade">
+                            <label for="quantidade"><span class="fw-bold text-danger">*</span> Quantidade</label>
+                            <input type="number" formControlName="quantidade" class="form-control" [ngClass]="{'is-invalid': quantidade.invalid && formDir.submitted, 'is-valid': quantidade.valid}" id="exampleFormControlInput1" placeholder="Quantidade">
                         </div>
-                        <div *ngIf="nome.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
-                            <p *ngIf="nome.errors?.['required']">
+                        <div *ngIf="quantidade.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
+                            <p *ngIf="quantidade.errors?.['required']">
                               A quantidade é obrigatória
                             </p>
                           </div>
                     </div>
                 </div>
+                <div class="col-6">
+                  <div class="p-3 form-group ps-0">
+                      <div class="">
+                          <label for="valor"><span class="fw-bold text-danger">*</span> Valor</label>
+                          <input type="number" formControlName="valor" class="form-control" [ngClass]="{'is-invalid': valor.invalid && formDir.submitted, 'is-valid': valor.valid}" id="exampleFormControlInput1" placeholder="valor">
+                      </div>
+                      <div *ngIf="valor.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
+                          <p *ngIf="valor.errors?.['required']">
+                            O valor é obrigatório
+                          </p>
+                        </div>
+                  </div>
+              </div>
                 <div class="col-12">
                     <div class="p-3 pt-0 form-group">
                         <label for="descricao" class="form-label">Descrição</label>
