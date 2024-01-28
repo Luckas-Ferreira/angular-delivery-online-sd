@@ -301,16 +301,18 @@ function GetPedidos(){
 
     $pedidos_ids = $database->select("pedidos", "pedido_id");
     $pedidos = [];
+
     foreach($pedidos_ids as $pedido_id){
         $lanches_ids = $database->select("pedido_lanches", "lanche_id", ['pedido_id' => $pedido_id]);
         $pedido = [];
         $lanches = [];
-        array_push($pedido, ['pedido_id' => $pedido_id]);
+        $pedido['pedido_id'] = $pedido_id;
         foreach($lanches_ids as $lanche_id){
             $lanche = $database->get("lanche", "*", ['lanche_id' => $lanche_id]);
             array_push($lanches, $lanche);
         }
-        $pedidos['lanches'] = $lanches;
+        $pedido['lanches'] = $lanches;
+        array_push($pedidos, $pedido);
     }
 
     return ['ok' => true, 'pedidos' => $pedidos];
