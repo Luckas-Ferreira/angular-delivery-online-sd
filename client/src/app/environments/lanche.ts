@@ -1,7 +1,7 @@
 export const lanche = {
-    getLanche: 'https://terciodelivery.robertogram.com.br/GetLanche',
-    getLanches: 'https://terciodelivery.robertogram.com.br/GetLanches',
-    createLanche: 'https://terciodelivery.robertogram.com.br/CreateLanche',
-    deleteLanche: 'https://terciodelivery.robertogram.com.br/DeleteLanche',
-    updateLanche: 'https://terciodelivery.robertogram.com.br/UpdateLanche',
+    getLanche: 'https://terciodelivery.robertogram.com.br/api/GetLanche',
+    getLanches: 'https://terciodelivery.robertogram.com.br/api/GetLanches',
+    createLanche: 'https://terciodelivery.robertogram.com.br/api/CreateLanche',
+    deleteLanche: 'https://terciodelivery.robertogram.com.br/api/DeleteLanche',
+    updateLanche: 'https://terciodelivery.robertogram.com.br/api/UpdateLanche',
 }

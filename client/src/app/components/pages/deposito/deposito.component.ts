@@ -14,14 +14,22 @@ export class DepositoComponent implements OnInit{
   @ViewChild('debbug') debbug!: TemplateRef<any>;
   formDeposito!: FormGroup;
   modalRef!: BsModalRef;
+  statusDebug!: boolean;
   fraseAlert: string = '';
   config = {
     class: 'modal-dialog-centered',
     backdrop: 'static' as 'static'
   }
-  constructor(private router: Router, private Depositar: MoneyService, private modalService: BsModalService){}
+  constructor(private router: Router, private Depositar: MoneyService, private modalService: BsModalService){
+    if(localStorage.getItem('debug') == 'yes'){
+      this.statusDebug = true;
+    }else if(localStorage.getItem('debug') == 'no'){
+      this.statusDebug = false;
+    }
+  }
 
   ngOnInit(): void {
+
     this.Depositar.getMoney().subscribe((response: Depositar) => {
       if(response.ok){
         this.router.navigateByUrl('/inicio');
@@ -36,7 +44,9 @@ export class DepositoComponent implements OnInit{
   }
 
   depositar(){
-    this.modalRef.hide();
+    if(!this.statusDebug){
+      this.modalRef.hide();
+    }
     if(this.formDeposito.get('valor')!.valid){
       this.Depositar.depositarMoney({valor: this.formDeposito.get('valor')!.value}).subscribe((response: Depositar) => {
         if(response.ok){

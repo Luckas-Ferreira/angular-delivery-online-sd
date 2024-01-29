@@ -16,13 +16,20 @@ export class PedidoComponent {
   modalRef!: BsModalRef;
   @ViewChild('debbug') debbug!: TemplateRef<any>;
   dataLanche: Lanche[] = [];
+  statusDebug!: boolean;
   total: number = 0;
   fraseAlert: string = '';
   config2 = {
     class: 'modal-dialog-centered',
     backdrop: 'static' as 'static'
   }
-  constructor ( private Depositar: MoneyService, private modalService: BsModalService, private shared: SharedDataService, private pedido: PedidoService){}
+  constructor ( private Depositar: MoneyService, private modalService: BsModalService, private shared: SharedDataService, private pedido: PedidoService){
+    if(localStorage.getItem('debug') == 'yes'){
+      this.statusDebug = true;
+    }else if(localStorage.getItem('debug') == 'no'){
+      this.statusDebug = false;
+    }
+  }
   ngOnInit(): void {
     this.shared.currentLanches.subscribe(lanches => {
       this.dataLanche = lanches
@@ -100,7 +107,9 @@ export class PedidoComponent {
             alert!.classList.add('d-none');
           }, 4000);
     }
-    this.modalRef.hide();
+    if(!this.statusDebug){
+      this.modalRef.hide();
+    }
   }
 
   advanceApi(template: TemplateRef<any>) {

@@ -32,9 +32,12 @@
             <p class="typography">Total</p>
             <p class="typography">R${{total || 0}}.00</p>
         </div>
-        <div class="mt-3">
+        <div *ngIf="!statusDebug; else noDebug" class="mt-3">
             <button type="button" (click)="advanceApi(debbug)" class="btn btn-dark" style="border-radius: 15px; width: 100%;">Fazer pedido</button>
         </div>
+        <ng-template #noDebug>
+            <button type="button"  (click)="fazerPedido()" class="btn btn-dark" style="border-radius: 15px; width: 100%;">Fazer pedido</button>
+        </ng-template>
     </div>
 </section>
 
@@ -60,7 +63,7 @@
             <p><strong>Accept:</strong> application/json, text/plain, */*</p>
         </div>
         <div class="modal-header pt-1">
-            <h2 class="modal-title">Payload</h2>
+            <h2 class="modal-title">Body</h2>
           </div>
           <div class="modal-body pt-0">
             <p ps-1><strong>Form Data</strong></p>

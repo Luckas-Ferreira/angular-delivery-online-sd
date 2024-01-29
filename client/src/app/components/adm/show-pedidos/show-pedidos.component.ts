@@ -14,6 +14,8 @@ export class ShowPedidosComponent implements OnInit{
 
   ngOnInit(): void {
     this.pedido.getPedido().subscribe((response: Pedido) => {
+      console.log(response);
+      
       if(response.ok){
         this.dataPedido = response.pedidos
       }

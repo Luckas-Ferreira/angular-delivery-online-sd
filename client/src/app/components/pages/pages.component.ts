@@ -12,6 +12,7 @@ import { MoneyService } from 'src/app/service/money.service';
 export class PagesComponent implements OnInit{
   modalRef!: BsModalRef;
   dataSaldo: number = 0;
+  statusDebug: boolean = false;
   config: ModalOptions = {
     class: 'modal-dialog-centered'
   }
@@ -35,7 +36,7 @@ export class PagesComponent implements OnInit{
     this.Depositar.retirarMoney({valor: this.dataSaldo}).subscribe((response: Depositar) => {
       if(response.ok){
         this.dataSaldo = response.saldo;
-        const alert = document.getElementById('success');
+        const alert = document.getElementById('SSuccess');
         alert!.classList.remove('d-none');
         setTimeout(() => {
           alert!.classList.add('d-none');

@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit{
   selectedLanche!: Lanche;
   selectLanche: Lanche[] = [];
   quantSelect!: FormGroup;
+  statusDebug!: boolean;
   modalRef!: BsModalRef;
   config: ModalOptions = {
     class: 'modal-dialog-centered'
@@ -29,7 +30,13 @@ export class HomeComponent implements OnInit{
     class: 'modal-dialog-centered',
     backdrop: 'static' as 'static'
   }
-  constructor(private router: Router, private shared: SharedDataService, private lanche: LancheService, private modalService: BsModalService){}
+  constructor(private router: Router, private shared: SharedDataService, private lanche: LancheService, private modalService: BsModalService){
+    if(localStorage.getItem('debug') == 'yes'){
+      this.statusDebug = true;
+    }else if(localStorage.getItem('debug') == 'no'){
+      this.statusDebug = false;
+    }
+  }
 
   ngOnInit(): void {
    this.getLanches()
@@ -69,7 +76,9 @@ export class HomeComponent implements OnInit{
           alert!.classList.add('d-none');
         }, 4000);
       }
-      this.modalRef.hide();
+      if(!this.statusDebug){
+        this.modalRef.hide();
+      }
     })
   }
 

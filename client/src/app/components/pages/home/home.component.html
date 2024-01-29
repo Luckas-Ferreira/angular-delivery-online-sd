@@ -20,9 +20,16 @@
                                 </button>
                               </div>
                               <div *ngIf="Router === '/admin/lanches'">
-                                <button class="btn btn-danger " (click)="advanceApi( debbug,lanche)">
-                                  apagar
-                                 </button>
+                                <div *ngIf="!statusDebug; else noDebug">
+                                  <button  class="btn btn-danger " (click)="advanceApi( debbug,lanche)">
+                                    apagar
+                                   </button>
+                                </div>
+                                 <ng-template #noDebug>
+                                    <button class="btn btn-danger " (click)="remover( lanche)">
+                                      apagar
+                                    </button>
+                                 </ng-template>
                               </div>
                             </div>
                         </div>
@@ -97,7 +104,7 @@
           <p><strong>Accept:</strong> application/json, text/plain, */*</p>
       </div>
       <div class="modal-header pt-1">
-          <h2 class="modal-title">Payload</h2>
+          <h2 class="modal-title">Body</h2>
         </div>
         <div class="modal-body pt-0">
           <p ps-1><strong>arrey[object]</strong></p>

@@ -1,1 +1,14 @@
+<div class="text-center p-2">
+    <button (click)="debug()" style="background-color: transparent; border: none;">
+        <div *ngIf="!statusDebug" class="d-flex align-items-baseline">
+            <i class="fa-solid fa-bug fa-xl"></i>
+            <p class="m-0"><strong>Debug on</strong></p>
+        </div>
+        <div *ngIf="statusDebug" class="d-flex align-items-baseline">
+            <i class="fa-solid fa-bug-slash fa-xl"></i>
+            <p class="m-0"><strong>Debug off</strong></p>
+        </div>
+    </button>
+    
+</div>
 <router-outlet></router-outlet>

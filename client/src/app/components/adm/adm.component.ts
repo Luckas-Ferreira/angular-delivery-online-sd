@@ -18,6 +18,7 @@ export class AdmComponent {
   formCreateLanche!: FormGroup
   formPhotos!: FormGroup
   formData = new FormData();
+  statusDebug!: boolean;
   config: ModalOptions = {
     class: 'modal-dialog-centered'
   }
@@ -27,7 +28,13 @@ export class AdmComponent {
   }
   constructor(
     private modalService: BsModalService,
-    private lanche: LancheService){}
+    private lanche: LancheService){
+      if(localStorage.getItem('debug') == 'yes'){
+        this.statusDebug = true;
+      }else if(localStorage.getItem('debug') == 'no'){
+        this.statusDebug = false;
+      }
+    }
 
   ngOnInit(): void {
     this.formPhotos = new FormGroup({
