@@ -1,17 +1,21 @@
-<h1 align="center"> Automação para ver anuncios em Nettli.com </h1>
+<h1 align="center"> Tércio Delivery </h1>
 
 
-<p align="center">O objetivo principal é torna o seu tempo mais precioso, deixando o computador realizar essa tarefa repetitiva de ver anúncios de forma automática.</p>
+<p align="center">Trabalho solicitado pelo professor Tércio de Morais, da disciplina de Sistemas Distribuídos..</p>
+<p align="center">Implementar um sistema CRUD (implemente duas ações) usando web services - REST</p>
 
 <p align="center"> 
-  <a href="https://www.python.org/">
-        <img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg" alt="site python">
+  <a href="https://angular.io/">
+        <img src="https://img.shields.io/badge/Made%20with-Angular-1f425f.svg" alt="site Angular">,
+  </a>
+  <a href="https://www.php.net/">
+        <img src="https://img.shields.io/badge/Made%20with-Php-1f425f.svg" alt="site Php">,
   </a>
 </p>
 
 
 <h4 align="center"> 
-	🚧  Automação para ver anuncios em Nettli.com 🚀 Em construção...  🚧
+	🚧  Trabalho finalizado  🚧
 </h4>
 
 #
@@ -30,13 +34,18 @@
 
 ### Demonstrações
 <h1 align="center">
-  Em breve!
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="client/assets/demo1.png" />
+  <img alt="demonstração" title="#NextLevelWeek" src="/client/src/assets/demo/demo1.png" />
+</h1>
+<hr>
+<h1 align="center">
+  <img alt="demonstração" title="#NextLevelWeek" src="/client/src/assets/demo/demo2.png" />
 </h1>
 
 ### Obeservação
-Por enquanto, só foi testado no Linux-Ubuntu, para usar no windows, sera necessario fazer alguns ajustes no codigo.
-- Versão para Windows saira em breve!
+<p>-Trabalho em dupla (no máximo)</p>
+<p>-Pontuação: 2,0</p>
+<p>-Implementar tanto cliente (chamada do serviço) quanto servidor</p>
+<p>-extra: como um cliente non-browser chamaria um web service?</p>
 
 ### Pré-requisitos
 
@@ -94,4 +103,13 @@ A seguinte ferramenta foi usada na construção do projeto:
 
  ---
 
-### _Me ajude a implementar o resto das Features e o suporte para Windows. Desde já agradeço!_ 😀
+<a href="https://github.com/robertogram">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/107446934?v=4" width="100px;" alt=""/>
+ <br />
+ <sub><b>Luckas Ferreira</b></sub></a> <a href="https://github.com/robertogram" title="Sistema Logístico">🚀</a>
+
+<a href="https://instagram.com/luckas_.ferreira" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
+  <a href = "mailto:lucas.ferreira2@arapiraca.ufal.br"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+  <a href="https://www.linkedin.com/in/luckas-ferreira-49a7a219b/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
+
+ ---
