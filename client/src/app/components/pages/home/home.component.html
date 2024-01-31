@@ -1,7 +1,7 @@
 <section>
         <div style="min-height: 500px;">
-            <div *ngIf="dataLanche.length > 0; else noLanche" class="row justify-content-center">
-                <div *ngFor="let lanche of dataLanche" class="col-5 shadow p-3 m-1 m-1 m-sm-3 bg-body rounded">
+            <div *ngIf="dataLanche.length > 0; else noLanche" class="row justify-content-center m-3 m-sm-0">
+                <div *ngFor="let lanche of dataLanche" class="col-12 col-sm-5 shadow mb-3 p-3 m-1 m-sm-3 bg-body rounded">
                     <div class="bg-white p-2" style="border-radius: 10px;">
                         <img [src]="lanche.foto" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
                         <div style="display: flex; justify-content: space-between;" class="mt-1">
@@ -91,30 +91,29 @@
 
   <!-- Modal -->
 <ng-template #debbug>
-  <div class="ms-4">
     <div class="modal-content" data-bs-backdrop="static">
       <div class="modal-header">
         <h2 class="modal-title">Headers</h2>
       </div>
-      <div class="modal-body pt-0">
-          <p><strong>authority:</strong>
-               terciodelivery.robertogram.com.br</p>
-          <p><strong>method:</strong> POST</p>
-          <p><strong>path:</strong> /DeleteLanche</p>
-          <p><strong>Accept:</strong> application/json, text/plain, */*</p>
-      </div>
+      <pre class="Codigo">
+        {{dataHeader}}
+      </pre>
       <div class="modal-header pt-1">
           <h2 class="modal-title">Body</h2>
         </div>
         <div class="modal-body pt-0">
-          <p ps-1><strong>arrey[object]</strong></p>
-          <div class="codigo">
-              <p class="identacao">"{{ '{' }}lanche_id: {{lancheAtual.lanche_id}}{{ '}' }}"</p>
-          </div>
+          <pre class="codigo">
+            {{dataBody}}
+          </pre>
         </div>
+        <div class="modal-header pt-1">
+          <h2 class="modal-title">Curl</h2>
+        </div>
+        <pre class="codigo">
+          {{dataCurl}}
+        </pre>
       <div class="modal-footer d-flex justify-content-end">
           <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="remover(lancheAtual)">Continuar</button>
       </div>
     </div>
-</div>
 </ng-template>

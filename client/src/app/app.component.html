@@ -1,14 +1,62 @@
-<div class="text-center p-2">
-    <button (click)="debug()" style="background-color: transparent; border: none;">
-        <div *ngIf="!statusDebug" class="d-flex align-items-baseline">
-            <i class="fa-solid fa-bug fa-xl"></i>
-            <p class="m-0"><strong>Debug on</strong></p>
-        </div>
-        <div *ngIf="statusDebug" class="d-flex align-items-baseline">
-            <i class="fa-solid fa-bug-slash fa-xl"></i>
-            <p class="m-0"><strong>Debug off</strong></p>
-        </div>
-    </button>
-    
+<div > 
+   <div class="row"  style="height: 56px;">
+    <div class="col-8 d-flex ps-4">
+        <button (click)="debug()" style="background-color: transparent; border: none;">
+            <div *ngIf="!statusDebug" class="d-flex align-items-baseline">
+                <i class="fa-solid fa-bug fa-xl"></i>
+                <p class="m-0"><strong>Debug on</strong></p>
+            </div>
+            <div *ngIf="statusDebug" class="d-flex align-items-baseline">
+                <i class="fa-solid fa-bug-slash fa-xl"></i>
+                <p class="m-0"><strong>Debug off</strong></p>
+            </div>
+        </button>
+    </div>
+    <div *ngIf="Routers == '/inicio'" class="col-4 d-flex justify-content-end align-items-center pe-4">
+        <p class="mt-3 pe-3" ><strong>R${{ dataSaldo || 0}}.00</strong></p>
+        <button class="dropdown-toggle"  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border: none;">
+            <i class="fa-solid fa-user fa-xl"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" (click)="runDebug(debbug)"><i class="fa-solid fa-person-praying"></i> Deixar de gorjeta </a></li>
+          </ul>
+    </div>
+   </div>
 </div>
 <router-outlet></router-outlet>
+
+
+<div class="alert alert-success d-none fixed-bottom text-center" role="alert" id="SSuccess">
+    <p class="mb-0"><strong>A firma agradece!</strong></p>
+</div>
+
+
+<!-- Modal -->
+<ng-template #debbug>
+    <div class="ms-4">
+      <div class="modal-content" data-bs-backdrop="static">
+        <div class="modal-header">
+          <h2 class="modal-title">Headers</h2>
+        </div>
+        <div class="modal-body pt-0">
+            <p><strong>authority:</strong>
+                 terciodelivery.robertogram.com.br</p>
+            <p><strong>method:</strong> POST</p>
+            <p><strong>path:</strong> /RetirarMoney</p>
+            <p><strong>Accept:</strong> application/json, text/plain, */*</p>
+        </div>
+        <div class="modal-header pt-1">
+            <h2 class="modal-title">Body</h2>
+          </div>
+          <div class="modal-body pt-0">
+            <p ps-1><strong>array[object]</strong></p>
+            <div class="codigo">
+                <p class="identacao">{{ '{' }}valor: {{dataSaldo}}{{ '}' }}</p>
+            </div>
+          </div>
+        <div class="modal-footer d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="deixarFirma()">Continuar</button>
+        </div>
+      </div>
+  </div>
+  </ng-template>

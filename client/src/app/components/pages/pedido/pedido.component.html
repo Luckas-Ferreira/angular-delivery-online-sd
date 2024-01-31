@@ -1,4 +1,4 @@
-<section class="shadow p-3 mb-5 bg-body" style="background-color: white; border-radius: 30px;">
+<section class="shadow p-3 m-sm-3 mb-5 bg-body" style="background-color: white; border-radius: 30px;">
     <div>
         <h3>Pedido</h3>
     </div>
@@ -54,25 +54,25 @@
     <div class="ms-4">
       <div class="modal-content" data-bs-backdrop="static">
         <div class="modal-header">
-          <h2 class="modal-title">Headers</h2>
-        </div>
-        <div class="modal-body pt-0">
-            <p><strong>authority:</strong> terciodelivery.robertogram.com.br</p>
-            <p><strong>method:</strong> POST</p>
-            <p><strong>path:</strong> /CreateLanche</p>
-            <p><strong>Accept:</strong> application/json, text/plain, */*</p>
-        </div>
-        <div class="modal-header pt-1">
-            <h2 class="modal-title">Body</h2>
+            <h2 class="modal-title">Headers</h2>
           </div>
-          <div class="modal-body pt-0">
-            <p ps-1><strong>Form Data</strong></p>
-            <div  class="codigo">
-                lanches: [
-                <p *ngFor="let pedido of dataLanche" class="identacao">"{{ '{' }}lanche_id: {{pedido.lanche_id}} , quantSelect: {{pedido.quantSelect}} {{ '}' }}"</p>
-                ]
+          <pre class="Codigo">
+            {{dataHeader}}
+          </pre>
+          <div class="modal-header pt-1">
+              <h2 class="modal-title">Body</h2>
             </div>
-          </div>
+            <div class="modal-body pt-0">
+              <pre class="codigo">
+                {{dataBody}}
+              </pre>
+            </div>
+            <div class="modal-header pt-1">
+              <h2 class="modal-title">Curl</h2>
+            </div>
+            <pre class="codigo">
+              {{dataCurl}}
+            </pre>
         <div class="modal-footer d-flex justify-content-end">
             <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="fazerPedido()">Continuar</button>
         </div>

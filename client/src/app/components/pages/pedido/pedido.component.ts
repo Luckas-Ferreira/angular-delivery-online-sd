@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Depositar } from 'src/app/interface/Depositar';
 import { Lanche } from 'src/app/interface/Lanche';
 import {Pedido} from 'src/app/interface/Pedido'
+import { debug } from 'src/app/interface/debug';
 import { SharedDataService } from 'src/app/service/SharedData.service';
 import { MoneyService } from 'src/app/service/money.service';
 import { PedidoService } from 'src/app/service/pedido.service';
@@ -14,6 +15,9 @@ import { PedidoService } from 'src/app/service/pedido.service';
 })
 export class PedidoComponent {
   modalRef!: BsModalRef;
+  dataHeader!: any;
+  dataCurl!: any;
+  dataBody!: any;
   @ViewChild('debbug') debbug!: TemplateRef<any>;
   dataLanche: Lanche[] = [];
   statusDebug!: boolean;
@@ -33,8 +37,6 @@ export class PedidoComponent {
   ngOnInit(): void {
     this.shared.currentLanches.subscribe(lanches => {
       this.dataLanche = lanches
-      console.log(this.dataLanche);
-      
       this.calculateTotal();
     });
   }
@@ -52,7 +54,7 @@ export class PedidoComponent {
       let saldoTotal = 0
       let pedido = this.dataLanche.map(lanche => {
         quantTotal += lanche.quantSelect
-        saldoTotal += lanche.valor;
+        saldoTotal += lanche.valor * lanche.quantSelect;
         return {lanche_id: lanche.lanche_id, quantDispo: lanche.quantSelect};
       });
       let pedidov2 = {
@@ -113,6 +115,30 @@ export class PedidoComponent {
   }
 
   advanceApi(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, this.config2);
+    let pedido = this.dataLanche.map(lanche => {
+      return {lanche_id: lanche.lanche_id, quantDispo: lanche.quantSelect};
+    });
+    let pedidov2 = {
+      lanches: pedido 
+    }
+    this.pedido.fazerPedido({debug: true, pedido}).subscribe((response: debug) => {
+      if(response.ok){
+        var header = JSON.stringify(response.headers, null, 2).replace('{', '').replace('}', '');
+        var body = JSON.stringify(response.body, null, 2).replace('{', '').replace('}', '')
+        var curl = JSON.stringify(response.curl, null, 2);
+        this.dataHeader = header
+        this.dataCurl = curl
+        this.dataBody = body
+        this.modalRef = this.modalService.show(template, this.config2);
+      }
+      else{
+          this.fraseAlert = response.message!;
+          const alert = document.getElementById('error');
+          alert!.classList.remove('d-none');
+          setTimeout(() => {
+          alert!.classList.add('d-none');
+          }, 7000);
+      }
+    })
   }
 }

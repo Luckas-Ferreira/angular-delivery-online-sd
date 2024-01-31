@@ -48,27 +48,28 @@
 
 <!-- Modal -->
 <ng-template #debbug>
-    <div class="ms-4">
+    <div>
       <div class="modal-content" data-bs-backdrop="static">
-        <div class="modal-header">
+       <div class="modal-header">
           <h2 class="modal-title">Headers</h2>
         </div>
-        <div class="modal-body pt-0">
-            <p><strong>authority:</strong>
-                 terciodelivery.robertogram.com.br</p>
-            <p><strong>method:</strong> POST</p>
-            <p><strong>path:</strong> /DepositarMoney</p>
-            <p><strong>Accept:</strong> application/json, text/plain, */*</p>
-        </div>
+        <pre class="Codigo">
+          {{dataHeader}}
+        </pre>
         <div class="modal-header pt-1">
             <h2 class="modal-title">Body</h2>
           </div>
           <div class="modal-body pt-0">
-            <p ps-1><strong>arrey[object]</strong></p>
-            <div class="codigo">
-                <p class="identacao">"{{ '{' }}valor: 3{{ '}' }}"</p>
-            </div>
+            <pre class="codigo">
+              {{dataBody}}
+            </pre>
           </div>
+          <div class="modal-header pt-1">
+            <h2 class="modal-title">Curl</h2>
+          </div>
+          <pre>
+            {{dataCurl}}
+          </pre>
         <div class="modal-footer d-flex justify-content-end">
             <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="depositar()">Continuar</button>
         </div>

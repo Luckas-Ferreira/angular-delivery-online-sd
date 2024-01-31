@@ -5,6 +5,7 @@ import { Lanche } from 'src/app/interface/Lanche';
 import { SharedDataService } from 'src/app/service/SharedData.service';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { debug } from 'src/app/interface/debug';
 
 
 
@@ -15,6 +16,9 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit{
   dataLanche: Lanche[] = [];
+  dataHeader!: any;
+  dataCurl!: any;
+  dataBody!: any;
   fraseAlert: string = '';
   lancheAtual!: Lanche;
   studentVerification: boolean = true;
@@ -60,6 +64,7 @@ export class HomeComponent implements OnInit{
 
   remover(lanche: Lanche){
     this.lanche.deleteLanche({lanche_id: lanche.lanche_id}).subscribe((Response: Lanche) =>{
+
       if(Response.ok){
         this.fraseAlert = 'Lanche apagado com sucesso'!;
         const alert = document.getElementById('success');
@@ -99,8 +104,26 @@ export class HomeComponent implements OnInit{
   }
 
   advanceApi(template: TemplateRef<any>, lanche: Lanche) {
+    this.lanche.deleteLanche({debug: true, lanche_id: lanche.lanche_id}).subscribe((response: debug) => {
+      if(response.ok){
+        var header = JSON.stringify(response.headers, null, 2).replace('{', '').replace('}', '');
+        var body = JSON.stringify(response.body, null, 2).replace('{', '').replace('}', '')
+        var curl = JSON.stringify(response.curl, null, 2);
+        this.dataHeader = header
+        this.dataCurl = curl
+        this.dataBody = body
+        this.modalRef = this.modalService.show(template, this.config2);
+      }
+      else{
+          this.fraseAlert = response.message!;
+          const alert = document.getElementById('error');
+          alert!.classList.remove('d-none');
+          setTimeout(() => {
+          alert!.classList.add('d-none');
+          }, 7000);
+      }
+    })
     this.lancheAtual = lanche;
-    this.modalRef = this.modalService.show(template, this.config2);
   }
 
   adicionar(){

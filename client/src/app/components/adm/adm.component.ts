@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Lanche } from 'src/app/interface/Lanche';
+import { debug } from 'src/app/interface/debug';
 import { LancheService } from 'src/app/service/lanche.service';
 
 @Component({
@@ -11,6 +12,10 @@ import { LancheService } from 'src/app/service/lanche.service';
   styleUrls: ['./adm.component.css']
 })
 export class AdmComponent {
+  file: any;
+  dataHeader: any;
+  dataCurl: any;
+  dataBody: any;
   fraseAlert: string = '';
   modalRef!: BsModalRef;
   @ViewChild('debbug') debbug!: TemplateRef<any>;
@@ -80,8 +85,10 @@ export class AdmComponent {
     return true;
   }
   createLanche(){
+    this.formData = new FormData();
     if(this.validateRegister()){
       this.spinner = false;
+      this.formData.append('foto', this.file, this.formPhotos.get('fotoLanche')!.value.nome);
       this.lanche.createLanche(this.formData).subscribe((Response: Lanche) => {
         if(Response.ok){
           this.fraseAlert = 'Lanche adicionado com sucesso'!;
@@ -107,8 +114,8 @@ export class AdmComponent {
   }
 
   fileChangeEvent(event: any): void {
-    let file = event.target.files[0];
-    this.formData.append('foto', file, this.formPhotos.get('fotoLanche')!.value.nome);
+    this.file = event.target.files[0];
+    this.formData.append('foto', this.file, this.formPhotos.get('fotoLanche')!.value.nome);
   }
   
   adicionarLanche( template: TemplateRef<any>){
@@ -116,11 +123,33 @@ export class AdmComponent {
 }
 
 advanceApi(template: TemplateRef<any>) {
+  this.formData = new FormData();
   if(this.validateRegister()){
+    this.formData.append('foto', this.file, this.formPhotos.get('fotoLanche')!.value.nome);
     this.modalRef.hide();
-    setTimeout(() => {
-      this.modalRef = this.modalService.show(template, this.config2);
-    }, 1000);
+    this.formData.append('debug', 'true');
+    this.lanche.createLanche( this.formData).subscribe((response: debug) => {
+      if(response.ok){
+        var header = JSON.stringify(response.headers, null, 2).replace('{', '').replace('}', '');
+        var body = JSON.stringify(response.body, null, 2).replace('{', '').replace('}', '')
+        var curl = JSON.stringify(response.curl, null, 2);
+        this.dataHeader = header
+        this.dataCurl = curl
+        this.dataBody = body
+        setTimeout(() => {
+          this.modalRef = this.modalService.show(template, this.config2);
+        }, 1000);
+      }
+      else{
+          this.fraseAlert = response.message!;
+          const alert = document.getElementById('error');
+          alert!.classList.remove('d-none');
+          setTimeout(() => {
+          alert!.classList.add('d-none');
+          }, 7000);
+      }
+    })
+    
   }
 }
 

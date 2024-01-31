@@ -1,5 +1,4 @@
 <header class="Header" style="background-color: #f3f2f5;">
-    
     <a href="/inicio">
       <div class="p-2" style="display: flex;
     justify-content: center;">
@@ -9,18 +8,19 @@
     </a>
 </header>
 <section class="background" style="background-color: #f3f2f5;">
-    <div class="Container">
+    <div class="Container mt-4">
         <div class="row">
-            <div class="col-8 d-flex justify-content-center">
+            <div class="col-12 col-8 d-flex justify-content-center order-last order-sm-first">
                 <router-outlet></router-outlet>
             </div>
-            <div class="col-3 m-3 ">
-                <h3><Strong>Opções</Strong></h3>
-                <div class="d-grid gap-2">
-                    <button routerLink="pedidos" class="btn btn-secondary">Ver pedidos</button>
-                    <button routerLink="lanches" class="btn btn-secondary">Ver lanche</button>
-                    <button (click)="adicionarLanche(template)" class="btn btn-primary">Adicionar lanche</button>
-                    
+            <div class="col-12 col-3 m-3 order-first order-sm-last">
+                <div class="shadow mb-3 p-3 bg-body rounded">
+                  <h3 class="mb-3"><Strong>Opções</Strong></h3>
+                    <div class="d-grid gap-2 ">
+                      <button routerLink="pedidos" class="btn btn-secondary">Ver pedidos</button>
+                      <button routerLink="lanches" class="btn btn-secondary">Ver lanche</button>
+                      <button (click)="adicionarLanche(template)" class="btn btn-primary">Adicionar lanche</button>
+                    </div>
                   </div>
             </div>
         </div>
@@ -221,25 +221,23 @@
       <div class="modal-header">
         <h2 class="modal-title">Headers</h2>
       </div>
-      <div class="modal-body pt-0">
-          <p><strong>authority:</strong> terciodelivery.robertogram.com.br</p>
-          <p><strong>method:</strong> POST</p>
-          <p><strong>path:</strong> /CreateLanche</p>
-          <p><strong>Accept:</strong> application/json, text/plain, */*</p>
-      </div>
+      <pre class="Codigo">
+        {{dataHeader}}
+      </pre>
       <div class="modal-header pt-1">
           <h2 class="modal-title">Body</h2>
         </div>
         <div class="modal-body pt-0">
-          <p ps-1><strong>Form Data</strong></p>
-          <div class="codigo">
-              <strong class="identacao">foto:</strong> (binary) <br>
-              <strong class="identacao">nome:</strong> {{formCreateLanche.get('nome')!.value}} <br>
-              <strong class="identacao">descricao:</strong> {{formCreateLanche.get('descricao')!.value}} <br>
-              <strong class="identacao">valor: </strong> {{formCreateLanche.get('valor')!.value}} <br>
-              <strong class="identacao">quantDispo:</strong> {{formCreateLanche.get('quantidade')!.value}} <br>
-          </div>
+          <pre class="codigo">
+            {{dataBody}}
+          </pre>
         </div>
+        <div class="modal-header pt-1">
+          <h2 class="modal-title">Curl</h2>
+        </div>
+        <pre>
+          {{dataCurl}}
+        </pre>
       <div class="modal-footer d-flex justify-content-end">
           <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="createLanche()">Continuar</button>
       </div>

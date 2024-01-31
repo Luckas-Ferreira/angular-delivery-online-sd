@@ -9,11 +9,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowPedidosComponent } from './components/adm/show-pedidos/show-pedidos.component';
 import { AdmModule } from './components/adm/adm.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalComponent } from './components/modal/modal.component';
 @NgModule({
   declarations: [
     AppComponent,
     DepositoComponent,
     ShowPedidosComponent,
+    ModalComponent,
   ],
   imports: [
     PagesModule,
