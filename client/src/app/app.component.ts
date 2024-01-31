@@ -3,6 +3,7 @@ import { Depositar } from './interface/Depositar';
 import { Router } from '@angular/router';
 import { MoneyService } from './service/money.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { debug } from './interface/debug';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,10 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  fraseAlert: string = '';
+  dataHeader: any;
+  dataCurl: any;
+  dataBody: any;
   dataSaldo: number = 0;
   modalRef!: BsModalRef;
   title = 'delivery-online';
@@ -47,7 +52,28 @@ export class AppComponent implements OnInit{
   }
 
   runDebug(template: TemplateRef<any>){
-    this.modalRef = this.modalService.show(template, this.config);
+    this.Depositar.retirarMoney({debug: true}).subscribe((response: debug) => {
+      if(response.ok){
+        var header = JSON.stringify(response.headers, null, 2).replace('{', '').replace('}', '');
+        var body = JSON.stringify(response.body, null, 2).replace('{', '').replace('}', '')
+        var curl = JSON.stringify(response.curl, null, 2);
+        this.dataHeader = header
+        this.dataCurl = curl
+        this.dataBody = body
+        setTimeout(() => {
+          this.modalRef = this.modalService.show(template, this.config);
+        }, 1000);
+      }
+      else{
+          this.fraseAlert = response.message!;
+          const alert = document.getElementById('Error');
+          alert!.classList.remove('d-none');
+          setTimeout(() => {
+          alert!.classList.add('d-none');
+          
+          }, 3000);
+      }
+    })
   }
   get Routers(){
     return this.router.url;
@@ -60,7 +86,8 @@ export class AppComponent implements OnInit{
         alert!.classList.remove('d-none');
         setTimeout(() => {
           alert!.classList.add('d-none');
-        }, 7000);
+          this.router.navigateByUrl('/depositar');
+        }, 2000);
       }
     })
     if(!this.statusDebug){
