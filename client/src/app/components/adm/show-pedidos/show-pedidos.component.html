@@ -1,6 +1,5 @@
 <div *ngIf="dataPedido.length > 0 else noPedido" class="Container shadow p-3 m-3 bg-body rounded" style="width: 400px; min-height: 300px; border-radius: 30px;">
     <div *ngIf="!statusDebug" class="text-center mb-4">
-        opa
         <button class="btn btn-secondary" (click)="advanceApi()">Limpar pedido</button>
     </div>
     <div  *ngIf="statusDebug" class="text-center mb-4">
