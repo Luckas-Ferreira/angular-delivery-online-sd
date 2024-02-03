@@ -1,0 +1,26 @@
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.codigo {
+    background-color: #333;
+    color: white; 
+    padding: 10px; 
+    border-radius: 5px; 
+    font-family: monospace; 
+}
+
+.identacao{
+    margin-left: 5%;
+}
+
+.Codigo{
+    background-color: #333;
+    color: white; 
+    padding: 10px; 
+    border-radius: 5px; 
+    font-family: monospace; 
+    margin-right: 16px;
+    margin-left: 16px;
+}

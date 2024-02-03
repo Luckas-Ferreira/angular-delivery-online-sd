@@ -1,5 +1,5 @@
 export interface Pedido {
-    ok?: boolean;
+    ok: boolean;
     message?: string;
     nome: string;
     descricao: string;
