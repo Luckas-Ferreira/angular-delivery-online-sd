@@ -18,7 +18,12 @@
             <i class="fa-solid fa-user fa-xl"></i>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" (click)="runDebug(debbug)"><i class="fa-solid fa-person-praying"></i> Deixar de gorjeta </a></li>
+            <li *ngIf="!statusDebug">
+              <a class="dropdown-item" (click)="runDebug(debbug)"><i class="fa-solid fa-person-praying"></i> Deixar de gorjeta </a>
+            </li>
+            <li *ngIf="statusDebug">
+              <a class="dropdown-item" (click)="deixarFirma()"><i class="fa-solid fa-person-praying"></i> Deixar de gorjeta </a>
+            </li>
           </ul>
     </div>
    </div>

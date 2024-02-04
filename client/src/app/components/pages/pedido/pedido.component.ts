@@ -71,7 +71,9 @@ export class PedidoComponent {
                     alert!.classList.remove('d-none');
                     setTimeout(() => {
                       alert!.classList.add('d-none');
-                    }, 4000);
+                      window.location.reload()
+                    }, 2000);
+                    
                   }else{
                     this.fraseAlert = 'Saldo insuficiente';
                     const alert = document.getElementById('Error');

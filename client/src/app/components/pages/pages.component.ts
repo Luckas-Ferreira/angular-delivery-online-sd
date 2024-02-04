@@ -30,19 +30,4 @@ export class PagesComponent implements OnInit{
   retirarValor( template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template, this.config)
 }
-
-
-  deixarFirma(){
-    this.Depositar.retirarMoney({valor: this.dataSaldo}).subscribe((response: Depositar) => {
-      if(response.ok){
-        this.dataSaldo = response.saldo;
-        const alert = document.getElementById('SSuccess');
-        alert!.classList.remove('d-none');
-        setTimeout(() => {
-          alert!.classList.add('d-none');
-        }, 7000);
-      }
-    })
-    
-  }
 }
