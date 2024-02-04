@@ -16,18 +16,20 @@
                               
                               <div *ngIf="Router === '/inicio'">
                                 <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template, lanche)">
-                                  {{lanche.quantDispo}} disponiveis <i class="fa-solid fa-plus fa-xl"></i>
+                                  {{lanche.quantDispo}} dispoíveis <i class="fa-solid fa-plus fa-xl"></i>
                                 </button>
                               </div>
                               <div *ngIf="Router === '/admin/lanches'">
                                 <div *ngIf="!statusDebug; else noDebug">
                                   <button  class="btn btn-danger " (click)="advanceApi( debbug,lanche)">
-                                    apagar
+                                    
+                                    Apagar
                                    </button>
                                 </div>
                                  <ng-template #noDebug>
                                     <button class="btn btn-danger " (click)="remover( lanche)">
-                                      apagar
+                                      
+                                      Apagar
                                     </button>
                                  </ng-template>
                               </div>
