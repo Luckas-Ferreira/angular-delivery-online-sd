@@ -40,11 +40,11 @@
  #
 ### Demonstrações
 <h1 align="center">
-  <img alt="demonstração" title="#NextLevelWeek" src="/client/src/assets/demo/demo1.png" />
+  <img alt="demonstração" title="#NextLevelWeek" src="/demo-img/example1.png" />
 </h1>
 <hr>
 <h1 align="center">
-  <img alt="demonstração" title="#NextLevelWeek" src="/client/src/assets/demo/demo2.png" />
+  <img alt="demonstração" title="#NextLevelWeek" src="/demo-img/example2.png" />
 </h1>
 
 #### Acesse:
@@ -103,39 +103,54 @@ Este guia fornece instruções detalhadas para a instalação e configuração d
      sudo /opt/lampp/lampp restart
      ```
 
-
--Primeiramente instalar 
-[Git](https://git-scm.com), [Python](https://www.python.org). 
-
-Será necessario ter as seguintes bibliotecas
-```bash
-# instalação do pyautogui
-$ pip install pyautogui
-
-# instalação do pythonCV
-$ pip install opencv-python
-
-# instalação da interface Tkinter
-$ sudo apt-get install python3-tk
-```
-Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
-
-### 🎲 Rodando o Sistema Logístico
-
-```bash
-# Clone este repositório
-$ git clone <https://github.com/Luckas-Ferreira/Automatizando-Nettli.git>
-
-# Acesse a pasta do projeto no terminal/cmd
-$ cd Automatizando-Nettli/cmd
-
-# Abra o Visual Code
-$ code .
-
-# Execulte o arquivo
-$ Nettli-Ubuntu.py ou $ Netlli-BigLinux.py
-```
 #
+
+#### Instalação e Configuração do Front-end com tecnologias usadas
+
+Este guia fornece instruções detalhadas para a instalação e configuração do Front-end usando (Angular, Node.js, bootstrap). O Node.js é uma solução fácil e rápida para instalar todas as dependecias necessarias para rodar o ambiente de desenvolvimento.
+
+#### Instalação do Node.js
+
+1. **Download do Node.js:**
+   - Acesse [o site oficial do Node.js](https://nodejs.org/en) e faça o download da versão 18 LTS ou superior.
+
+2. **Instale o Node.js:**
+   - Apos a instalação verifique com o seguinte comando no terminal:
+     ```bash
+     node -v
+     ```
+3. **Instalando dependias**
+   - Apos a clonar este repositorio, entre na pasta com o sequinte comando:
+     ```bash
+     cd cliente/
+     ```
+   - Agora execulte o seguinte comando:
+     ```bash
+     npm install
+     ```
+   - Com isso, todas as dependencias serão baixadas:
+
+4. **Execusão modo desenvolvimento:**
+   - Para execultar em modo de desenvolvimento, execulte o seguinte comando:
+    ```bash
+     ng server
+     ```
+5. **Build modo produção:**
+   - Para fazer o build em modo produção, execulte o seguinte comando:
+    ```bash
+     ng build --aot --configuration=production
+     ```
+
+
+#### Instalação do Angular
+
+1. **Instalação:**
+   - Acesse [o site oficial do Angular na tela de instalação](https://angular.io/guide/setup-local), ou execulte o seguinte comando no terminal.
+    ```bash
+     npm install -g @angular/cli@16.0.0
+     ```
+   - Perceba que usamos a tage '-g', isso indica que estamos instalando o Angular globalmente, em toda a maquina.
+   - Perceba que instalamos a versão 16.0.0, pois o projeto foi desenvolvido nesta versão.
 
 ### 🛠 Tecnologia
 
