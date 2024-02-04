@@ -65,7 +65,8 @@ CREATE TABLE `lanche` (
 
 CREATE TABLE `pedidos` (
   `pedido_id` int(11) NOT NULL,
-  `cliente_id` int(11) NOT NULL
+  `cliente_id` int(11) NOT NULL,
+  FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`cliente_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -75,10 +76,12 @@ CREATE TABLE `pedidos` (
 --
 
 CREATE TABLE `pedido_lanches` (
-  `pedido_lanches_id` int(11) NOT NULL,
+  `pedido_lanches_id` int(11) NOT NULL PRIMARY KEY,
   `pedido_id` int(11) NOT NULL,
   `lanche_id` int(11) NOT NULL,
-  `quantDispo` int(3) NOT NULL
+  `quantDispo` int(3) NOT NULL,
+  FOREIGN KEY (`lanche_id`) REFERENCES `lanche` (`lanche_id`),
+  FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`pedido_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
