@@ -94,7 +94,7 @@ Este guia fornece instruções detalhadas para a instalação e configuração d
    - Faça o upload do arquivo  `server/database/tercio_delivery.sql`
 
 7. **configurando o back-end**
-   - Mova os arquivos da pasta `/server` para `/opt/lampp/htdocs`
+   - Mova os arquivos da pasta `/server` para `opt/lampp/htdocs/api/`
    - Se necessário, configure o banco de dados na biblioteca do Medoo na linha 28 do arquivo index.php
 
 8. **Reiniciar o Apache:**
