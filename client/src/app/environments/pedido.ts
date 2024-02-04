@@ -1,5 +1,5 @@
 export const pedido = {
-    getPedidos: 'https://terciodelivery.robertogram.com.br/api/GetPedidos',
-    fazerPedido: 'https://terciodelivery.robertogram.com.br/api/FazerPedido',
-    limparPedidos: 'https://terciodelivery.robertogram.com.br/api/limparPedidos',
+    getPedidos: 'http://localhost/api/GetPedidos',
+    fazerPedido: 'http://localhost/api/FazerPedido',
+    limparPedidos: 'http://localhost/api/limparPedidos',
 }
