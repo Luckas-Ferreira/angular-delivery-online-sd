@@ -24,7 +24,7 @@
 - Pontuação: 2,0
 - Implementar tanto cliente (chamada do serviço) quanto servidor
 - extra: como um cliente non-browser chamaria um web service?
-
+ #
 ### Features
 
 - [x] Depositar valor
@@ -37,7 +37,7 @@
 - [x] Listar pedidos
 - [x] Limpar pedidos
 - [x] Debugar requisições
-
+ #
 ### Demonstrações
 <h1 align="center">
   <img alt="demonstração" title="#NextLevelWeek" src="/client/src/assets/demo/demo1.png" />
@@ -47,13 +47,13 @@
   <img alt="demonstração" title="#NextLevelWeek" src="/client/src/assets/demo/demo2.png" />
 </h1>
 
-### Acesse:
+#### Acesse:
 - [Inicial](https://terciodelivery.robertogram.com.br/) 
 - [Admin](https://terciodelivery.robertogram.com.br/admin) 
+ #
+### Pré-requisitos
 
-## Pré-requisitos
-
-### Instalação e Configuração da Pilha LAMP do Back-end com XAMPP
+#### Instalação e Configuração da Pilha LAMP do Back-end com XAMPP
 
 Este guia fornece instruções detalhadas para a instalação e configuração da pilha LAMP (Linux, Apache, MySQL, PHP) usando o XAMPP. O XAMPP é uma solução fácil e rápida para configurar um ambiente de desenvolvimento local que inclui **Apache**, **MariaDB**, **PHP** e **phpMyAdmin**.
 
@@ -61,7 +61,7 @@ Este guia fornece instruções detalhadas para a instalação e configuração d
 - **Sistema Operacional:** Linux (o XAMPP também está disponível para Windows e macOS, mas este guia foca na instalação no Linux).
 - **Permissões:** Você deve ter permissões de superusuário para instalar e configurar software no sistema.
 
-### Instalação do XAMPP
+#### Instalação do XAMPP
 
 1. **Download do XAMPP:**
    - Acesse [o site oficial do XAMPP](https://www.apachefriends.org/download.html) e faça o download da versão mais recente para Linux.
@@ -148,9 +148,8 @@ A seguinte ferramenta foi usada na construção do projeto:
 - [Composer](https://getcomposer.org/)
 - [Medoo](https://medoo.in/)
 
-
-### Autores
  #
+### Autores
 #### Luckas Ferreira
 <a href="https://instagram.com/luckas_.ferreira" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a><a href = "mailto:lucas.ferreira2@arapiraca.ufal.br"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a><a href="https://www.linkedin.com/in/luckas-ferreira-49a7a219b/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>  
   
