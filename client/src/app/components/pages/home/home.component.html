@@ -1,55 +1,121 @@
 <section>
         <div style="min-height: 500px;">
-            <div *ngIf="dataLanche.length > 0; else noLanche" class="row justify-content-center">
-                <!-- <div class=" col-5 shadow p-3 m-1 m-sm-3 bg-body rounded">
-                    <div class="bg-white p-2 " style="border-radius: 10px;">
-                        <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
-                        <div style="display: flex; justify-content: space-between;" class="mt-1">
-                            <p><strong style="font-size: 14px;">Nome do lanche</strong></p>
-                            <strong>R$ Valor</strong>
-                        </div>
-                        <div>
-                            <p class="tipography text-center">2 disponiveis <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template)"><i class="fa-solid fa-plus fa-xl"></i></button></p>
-                        </div>
-                    </div>
-                </div> -->
-                <div *ngFor="let lanche of dataLanche" class="col-5 shadow p-3 m-1 m-1 m-sm-3 bg-body rounded">
+            <div *ngIf="dataLanche.length > 0; else noLanche" class="row justify-content-center m-3 m-sm-0">
+                <div *ngFor="let lanche of dataLanche" class="col-12 col-sm-5 shadow mb-3 p-3 m-1 m-sm-3 bg-body rounded">
                     <div class="bg-white p-2" style="border-radius: 10px;">
-                        <img src="assets/lanches-gourmet.webp" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
+                        <img [src]="lanche.foto" style="border-radius: 10px;" class="img-fluid" alt="foto lanche">
                         <div style="display: flex; justify-content: space-between;" class="mt-1">
                             <p><strong style="font-size: 14px;">{{lanche.nome}}</strong></p>
-                            <strong>R$ {{lanche.valor}}</strong>
+                            <strong>R${{lanche.valor}}</strong>
                         </div>
                         <div>
-                            <p class="tipography text-center">{{lanche.quantDispo}} disponiveis <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template)"><i class="fa-solid fa-plus fa-xl"></i></button></p>
+                          <p>{{lanche.descricao}}</p>
+                        </div>
+                        <div>
+                            <div class="tipography text-center mb-0">
+                              
+                              <div *ngIf="Router === '/inicio'">
+                                <button style="border: none; background-color: transparent;" (click)="adicionarQuantidade(template, lanche)">
+                                  {{lanche.quantDispo}} dispoíveis <i class="fa-solid fa-plus fa-xl"></i>
+                                </button>
+                              </div>
+                              <div *ngIf="Router === '/admin/lanches'">
+                                <div *ngIf="!statusDebug; else noDebug">
+                                  <button  class="btn btn-danger " (click)="advanceApi( debbug,lanche)">
+                                    
+                                    Apagar
+                                   </button>
+                                </div>
+                                 <ng-template #noDebug>
+                                    <button class="btn btn-danger " (click)="remover( lanche)">
+                                      
+                                      Apagar
+                                    </button>
+                                 </ng-template>
+                              </div>
+                            </div>
                         </div>
                     </div>
                 </div>                
             </div>
-            <ng-template #noLanche>
-                <div class="mt-4 text-center">
-                    <h4><strong>Nenhum lanche disponível</strong></h4>
+            <ng-template class="loading" #noLanche>   
+                <div *ngIf="studentVerification">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
                 </div>
-                
+             
+              <div *ngIf="!studentVerification">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 text-center">
+                      <h3 class="card-body mb-0"><strong>Nenhum lanche disponível</strong></h3>
+                    </div>
+                  </div>
+              </div>
             </ng-template>
         </div>
 </section>
 
-
+<div class="alert alert-danger d-none fixed-bottom text-center" role="alert" id="error">
+  <p class="mb-0"><strong>{{fraseAlert}}</strong></p>
+</div>
+<div class="alert alert-success d-none fixed-bottom text-center" role="alert" id="success">
+  <p class="mb-0"><strong>{{fraseAlert}}</strong></p>
+</div>
 <!-- Modal -->
 <ng-template #template>
+    <form class="needs-validation" novalidate id="bookingForm" (ngSubmit)="adicionar()" #formDir="ngForm" [formGroup]="quantSelect" enctype="multipart/form-data">
     <div class="ms-4">
     <div class="modal-header">
       <h2 class="modal-title">Selecine a quantidade</h2>
     </div>
     <div class="modal-body pt-0">
         <div class="mb-3">
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantidade">
+            <label for="quantSelected"><span class="fw-bold text-danger">*</span> Quandidade desejada</label>
+            <input type="number" [ngClass]="{'is-invalid': quantSelected.invalid && formDir.submitted, 'is-valid': quantSelected.valid}"  formControlName="quantSelected" class="form-control" id="exampleFormControlInput1" placeholder="Quantidade">
+            <div *ngIf="quantSelected.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
+                <p *ngIf="quantSelected.errors?.['required']">A quantidade é obrigatória</p>
+                <p *ngIf="quantSelected.errors?.['invalidQuantity']">A quantidade é inválida</p>
+              </div>
         </div>
+        
     </div>
     <div class="modal-footer justify-content-end">
       <button type="button" class="btn btn-danger me-3" style="min-width: 20%;" (click)="modalRef.hide()">Cancelar</button>
-      <button type="button" id="remover" class="btn btn-primary" style="min-width: 20%;">Adicionar</button>
+      <button type="submit" id="remover" class="btn btn-primary" style="min-width: 20%;">Adicionar</button>
     </div>
   </div>
+    </form>
   </ng-template>
+
+
+  <!-- Modal -->
+<ng-template #debbug>
+    <div class="modal-content" data-bs-backdrop="static">
+      <div class="modal-header">
+        <h2 class="modal-title">Headers</h2>
+      </div>
+      <pre class="Codigo">
+        {{dataHeader}}
+      </pre>
+      <div class="modal-header pt-1">
+          <h2 class="modal-title">Body</h2>
+        </div>
+        <div class="modal-body pt-0">
+          <pre class="codigo">
+            {{dataBody}}
+          </pre>
+        </div>
+        <div class="modal-header pt-1">
+          <h2 class="modal-title">Curl</h2>
+        </div>
+        <pre class="codigo">
+          {{dataCurl}}
+        </pre>
+      <div class="modal-footer d-flex justify-content-end">
+          <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="remover(lancheAtual)">Continuar</button>
+      </div>
+    </div>
+</ng-template>

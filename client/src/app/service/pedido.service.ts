@@ -10,6 +10,7 @@ export class PedidoService {
 
   private GetPedido = pedido.getPedidos;
   private FazerPedido = pedido.fazerPedido;
+  private LimparPedidos = pedido.limparPedidos;
 
   constructor(private http: HttpClient) { }
 
@@ -18,5 +19,8 @@ export class PedidoService {
   }
   fazerPedido(object: object): Observable<any>{
     return this.http.post<any>(this.FazerPedido, object)
+  }
+  limparPedidos(object: object): Observable<any>{
+    return this.http.post<any>(this.LimparPedidos, object)
   }
 }

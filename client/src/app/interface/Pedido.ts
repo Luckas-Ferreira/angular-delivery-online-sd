@@ -4,9 +4,12 @@ export interface Pedido {
     nome: string;
     descricao: string;
     quantDispo: number;
-    pedidos: any;
-    pedido: {
-        id: number, 
-        quantDispo: number
-    }
+    pedidos: {
+        lanches: [
+            {
+                nome: string;
+                descricao: string;
+                quantDispo: number;}
+        ]
+    };
 }

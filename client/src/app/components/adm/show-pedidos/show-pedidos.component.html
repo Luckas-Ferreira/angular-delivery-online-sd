@@ -1,49 +1,77 @@
-<div class="Container col-5 shadow p-3 m-3 bg-body rounded" style="width: 400px; min-height: 300px; border-radius: 30px;">
-    <div class="text-center">
-        <h3 class="typography">Pedidos</h3>
+<div *ngIf="dataPedido.length > 0 else noPedido" class="Container shadow p-3 m-3 bg-body rounded" style="width: 400px; min-height: 300px; border-radius: 30px;">
+    <div *ngIf="!statusDebug" class="text-center mb-4">
+        <button class="btn btn-secondary" (click)="advanceApi()">Limpar pedidos</button>
     </div>
-    <div >
-        <hr>
-        <div class="mt-4" style="display: flex; justify-content: space-between;">
-            <p><strong>Nome: </strong>Capetinha</p>
-            <p><strong>Quantidade: </strong>2</p>
-        </div>
-        <p><strong>Descrição: </strong>Cebola, Alho, Pimenta</p>
-        <div style="display: flex; justify-content: end;">
-            <button class="btn btn-primary btn-sm">Entregar</button>
-        </div>
+    <div  *ngIf="statusDebug" class="text-center mb-4">
+        <button class="btn btn-secondary" (click)="LimparPedidos()">Limpar pedido</button>
     </div>
-    <div >
-        <hr>
-        <div class="mt-4" style="display: flex; justify-content: space-between;">
-            <p><strong>Nome: </strong>Capetinha</p>
-            <p><strong>Quantidade: </strong>2</p>
-        </div>
-        <p><strong>Descrição: </strong>Cebola, Alho, Pimenta</p>
-        <div style="display: flex; justify-content: end;">
-            <button class="btn btn-primary btn-sm">Entregar</button>
-        </div>
-    </div>
-    <div >
-        <hr>
-        <div class="mt-4" style="display: flex; justify-content: space-between;">
-            <p><strong>Nome: </strong>Capetinha</p>
-            <p><strong>Quantidade: </strong>2</p>
-        </div>
-        <p><strong>Descrição: </strong>Cebola, Alho, Pimenta</p>
-        <div style="display: flex; justify-content: end;">
-            <button class="btn btn-primary btn-sm">Entregar</button>
-        </div>
-    </div>
-    <div >
-        <hr>
-        <div class="mt-4" style="display: flex; justify-content: space-between;">
-            <p><strong>Nome: </strong>Capetinha</p>
-            <p><strong>Quantidade: </strong>2</p>
-        </div>
-        <p><strong>Descrição: </strong>Cebola, Alho, Pimenta</p>
-        <div style="display: flex; justify-content: end;">
-            <button class="btn btn-primary btn-sm">Entregar</button>
+    <div style="background-color: #f3f3f3;" *ngFor="let pedido of dataPedido; let lastPedido = last">
+        <div class="p-1 mb-4">
+            <div class="text-center">
+                <h3 style="background-color: #dfdfdf;" class="typography">Pedido</h3>
+            </div>
+            <div *ngFor="let lanche of pedido.lanches; let i = index; let isLast = last">
+                <div class="mt-4" style="display: flex; justify-content: space-between;" *ngIf="lanche">
+                  <p><strong>Nome: </strong>{{lanche.nome}}</p>
+                  <p><strong>Quantidade: </strong>{{lanche.quantDispo}}</p>
+                </div>
+                <p><strong>Descrição: </strong>{{lanche.descricao}}</p>
+                <div *ngIf="!(lastPedido && isLast)" style="
+                  border-top-style:dotted;
+                  border-top-width: 2px;
+                  border-top-color: rgb(77, 77, 77); background-color: transparent;"></div>
+              </div>          
         </div>
     </div>
 </div>
+
+<ng-template #noPedido  class="Loading" >   
+    <div *ngIf="pedidoVerification">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            </div>
+    </div>
+    
+    <div *ngIf="!pedidoVerification">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 text-center">
+            <h3 class="card-body mb-0"><strong>Nenhum pedido disponível</strong></h3>
+        </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<!-- Modal -->
+<ng-template #debbug>
+    <div class="ms-4">
+      <div class="modal-content" data-bs-backdrop="static">
+        <div class="modal-header">
+          <h2 class="modal-title">Headers</h2>
+        </div>
+        <pre class="Codigo">
+          {{dataHeader}}
+        </pre>
+        <div class="modal-header pt-1">
+            <h2 class="modal-title">Body</h2>
+          </div>
+          <div class="modal-body pt-0">
+            <pre class="codigo">
+              {{dataBody}}
+            </pre>
+          </div>
+          <div class="modal-header pt-1">
+            <h2 class="modal-title">Curl</h2>
+          </div>
+          <pre class="codigo">
+            {{dataCurl}}
+          </pre>
+        <div class="modal-footer d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="LimparPedidos()">Continuar</button>
+        </div>
+      </div>
+  </div>
+  </ng-template>
+  

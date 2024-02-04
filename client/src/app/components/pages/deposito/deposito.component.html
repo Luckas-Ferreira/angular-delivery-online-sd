@@ -1,10 +1,10 @@
-<section class="background " style="background-color: #f3f2f5; border-radius: 30px; display: flex; justify-content: center; align-items: center;">
+<section class="background " style="background-color: #f3f2f5; display: flex; justify-content: center; align-items: center;">
     <div class="Container col-5 shadow p-3 m-3 bg-body rounded" style="width: 400px; height: 300px; border-radius: 30px;     display: flex;
     justify-content: center;
     border-radius: 30px;
     flex-wrap: wrap;
     flex-direction: column;">
-    <form class="needs-validation" novalidate id="bookingForm" (ngSubmit)="depositar()" #formDir="ngForm" [formGroup]="formDeposito" enctype="multipart/form-data">
+    <form *ngIf="!statusDebug; else noDebug" class="needs-validation" novalidate id="bookingForm" (ngSubmit)="advanceApi(debbug)" #formDir="ngForm" [formGroup]="formDeposito" enctype="multipart/form-data">
         <div class="p-3 form-group">
             <h1 class="text-center">Depositar</h1>
             <div class="mb-3 mt-5">
@@ -19,8 +19,25 @@
                 <button type="submit"  class="btn btn-primary" style="width: 100%;">Adicionar</button>
             </div>
         </div>
-        
         </form>
+        <ng-template #noDebug>
+          <form *ngIf="statusDebug" class="needs-validation" novalidate id="bookingForm" (ngSubmit)="depositar()" #formDir="ngForm" [formGroup]="formDeposito" enctype="multipart/form-data">
+            <div class="p-3 form-group">
+                <h1 class="text-center">Depositar</h1>
+                <div class="mb-3 mt-5">
+                    <input type="number" formControlName="valor" class="form-control" [ngClass]="{'is-invalid': valor.invalid && formDir.submitted, 'is-valid': valor.valid}" id="exampleFormControlInput1" placeholder="Quantidade">
+                </div>
+                <div *ngIf="valor.invalid && formDir.submitted" class="invalid-feedback" style="display: block;">
+                    <p *ngIf="valor.errors?.['required']">
+                      O valor de deposito é obrigatório
+                    </p>
+                  </div>
+                <div class="mt-5">
+                    <button type="submit"  class="btn btn-primary" style="width: 100%;">Adicionar</button>
+                </div>
+            </div>
+            </form>
+        </ng-template>
     </div>
     
 </section>
@@ -28,3 +45,34 @@
 <div class="alert alert-danger d-none fixed-bottom text-center" role="alert" id="error">
     <p class="mb-0"><strong>{{fraseAlert}}</strong></p>
 </div>
+
+<!-- Modal -->
+<ng-template #debbug>
+    <div>
+      <div class="modal-content" data-bs-backdrop="static">
+       <div class="modal-header">
+          <h2 class="modal-title">Headers</h2>
+        </div>
+        <pre class="Codigo">
+          {{dataHeader}}
+        </pre>
+        <div class="modal-header pt-1">
+            <h2 class="modal-title">Body</h2>
+          </div>
+          <div class="modal-body pt-0">
+            <pre class="codigo">
+              {{dataBody}}
+            </pre>
+          </div>
+          <div class="modal-header pt-1">
+            <h2 class="modal-title">Curl</h2>
+          </div>
+          <pre class="codigo">
+            {{dataCurl}}
+          </pre>
+        <div class="modal-footer d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" style="min-width: 20%;" (click)="depositar()">Continuar</button>
+        </div>
+      </div>
+  </div>
+  </ng-template>
