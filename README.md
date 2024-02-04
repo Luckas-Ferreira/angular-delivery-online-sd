@@ -116,42 +116,47 @@ Este guia fornece instruções detalhadas para a instalação e configuração d
 
 2. **Instale o Node.js:**
    - Após a instalação, verifique com o seguinte comando no terminal:
-     ```bash
-     node -v
-     ```
+   ```bash
+     node -v
+     ```
 
 #### Instalação do Angular
 
 1. **Instalação:**
    - Acesse [o site oficial do Angular na tela de instalação](https://angular.io/guide/setup-local), ou execute o seguinte comando no terminal.
-    ```bash
-     npm install -g @angular/cli@16.0.0
-    ```
+    ```bash
+     npm install -g @angular/cli@16.0.0
+     ```
    - Perceba que usamos a tag '-g', isso indica que estamos instalando o Angular globalmente, em toda a máquina.
    - Perceba que instalamos a versão 16.0.0, pois o projeto foi desenvolvido nesta versão.
 
-2. **Instalando dependências.**
+
+3. **Instalando dependências.**
    - Após clonar este repositório, entre na pasta com o seguinte comando:
-     ```bash
-     cd cliente/
-     ```
+   ```bash
+     cd cliente/
+   ```
    - Agora, execute o seguinte comando:
-     ```bash
-     npm install
-     ```
+   ```bash
+     npm install
+   ```
    - Com isso, todas as dependências serão baixadas.
 
-3. **Execução, modo desenvolvimento:**
-   - Para executar em modo de desenvolvimento, execute o seguinte comando:
-     ```bash
-     ng server
-     ```
 
-4. **Build, modo produção:**
+5. **Execução, modo desenvolvimento:**
+   - Para executar em modo de desenvolvimento, execute o seguinte comando:
+   ```bash
+     ng server
+   ```
+
+
+6. **Build, modo produção:**
    - Para fazer o Build em modo produção, execute o seguinte comando:
-     ```bash
-     ng build --aot --configuration=production
-     ```
+   ```bash
+     ng build --aot --configuration=production
+   ```
+
+#
 
 ### 🛠 Tecnologia
 
