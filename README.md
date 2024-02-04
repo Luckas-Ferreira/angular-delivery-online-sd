@@ -105,52 +105,53 @@ Este guia fornece instruções detalhadas para a instalação e configuração d
 
 #
 
-#### Instalação e Configuração do Front-end com tecnologias usadas
+#### Instalação e Configuração do Front-end com tecnologias usadas.
 
-Este guia fornece instruções detalhadas para a instalação e configuração do Front-end usando (Angular, Node.js, bootstrap). O Node.js é uma solução fácil e rápida para instalar todas as dependecias necessarias para rodar o ambiente de desenvolvimento.
+Este guia fornece instruções detalhadas para a instalação e configuração do Front-end usando (Angular, Node.js, Bootstrap). O Node.js é uma solução fácil e rápida para instalar todas as dependências necessárias para rodar o ambiente de desenvolvimento.
 
 #### Instalação do Node.js
 
 1. **Download do Node.js:**
-   - Acesse [o site oficial do Node.js](https://nodejs.org/en) e faça o download da versão 18 LTS ou superior.
+   - Acesse [o site oficial do Node.js](https://nodejs.org/en) e faça o download da versão 18 LTS ou superior.
 
 2. **Instale o Node.js:**
-   - Apos a instalação verifique com o seguinte comando no terminal:
-     ```bash
-     node -v
-     ```
-3. **Instalando dependias**
-   - Apos a clonar este repositorio, entre na pasta com o sequinte comando:
-     ```bash
-     cd cliente/
-     ```
-   - Agora execulte o seguinte comando:
-     ```bash
-     npm install
-     ```
-   - Com isso, todas as dependencias serão baixadas:
-
-4. **Execusão modo desenvolvimento:**
-   - Para execultar em modo de desenvolvimento, execulte o seguinte comando:
-    ```bash
-     ng server
-     ```
-5. **Build modo produção:**
-   - Para fazer o build em modo produção, execulte o seguinte comando:
-    ```bash
-     ng build --aot --configuration=production
-     ```
-
+   - Após a instalação, verifique com o seguinte comando no terminal:
+     ```bash
+     node -v
+     ```
 
 #### Instalação do Angular
 
 1. **Instalação:**
-   - Acesse [o site oficial do Angular na tela de instalação](https://angular.io/guide/setup-local), ou execulte o seguinte comando no terminal.
-    ```bash
-     npm install -g @angular/cli@16.0.0
-     ```
-   - Perceba que usamos a tage '-g', isso indica que estamos instalando o Angular globalmente, em toda a maquina.
-   - Perceba que instalamos a versão 16.0.0, pois o projeto foi desenvolvido nesta versão.
+   - Acesse [o site oficial do Angular na tela de instalação](https://angular.io/guide/setup-local), ou execute o seguinte comando no terminal.
+    ```bash
+     npm install -g @angular/cli@16.0.0
+    ```
+   - Perceba que usamos a tag '-g', isso indica que estamos instalando o Angular globalmente, em toda a máquina.
+   - Perceba que instalamos a versão 16.0.0, pois o projeto foi desenvolvido nesta versão.
+
+2. **Instalando dependências.**
+   - Após clonar este repositório, entre na pasta com o seguinte comando:
+     ```bash
+     cd cliente/
+     ```
+   - Agora, execute o seguinte comando:
+     ```bash
+     npm install
+     ```
+   - Com isso, todas as dependências serão baixadas.
+
+3. **Execução, modo desenvolvimento:**
+   - Para executar em modo de desenvolvimento, execute o seguinte comando:
+     ```bash
+     ng server
+     ```
+
+4. **Build, modo produção:**
+   - Para fazer o Build em modo produção, execute o seguinte comando:
+     ```bash
+     ng build --aot --configuration=production
+     ```
 
 ### 🛠 Tecnologia
 
