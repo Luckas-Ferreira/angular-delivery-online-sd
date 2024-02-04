@@ -12,29 +12,8 @@
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/server/vendor/firebase/php-jwt" />
-      <path value="$PROJECT_DIR$/server/vendor/paragonie/constant_time_encoding" />
-      <path value="$PROJECT_DIR$/server/vendor/phpmailer/phpmailer" />
-      <path value="$PROJECT_DIR$/server/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/server/vendor/web-token/jwt-signature-algorithm-ecdsa" />
       <path value="$PROJECT_DIR$/server/vendor/composer" />
-      <path value="$PROJECT_DIR$/server/vendor/web-token/jwt-key-mgmt" />
-      <path value="$PROJECT_DIR$/server/vendor/web-token/jwt-core" />
-      <path value="$PROJECT_DIR$/server/vendor/web-token/jwt-signature" />
-      <path value="$PROJECT_DIR$/server/vendor/web-token/jwt-util-ecc" />
-      <path value="$PROJECT_DIR$/server/vendor/guzzlehttp/psr7" />
-      <path value="$PROJECT_DIR$/server/vendor/guzzlehttp/guzzle" />
-      <path value="$PROJECT_DIR$/server/vendor/guzzlehttp/promises" />
-      <path value="$PROJECT_DIR$/server/vendor/minishlink/web-push" />
-      <path value="$PROJECT_DIR$/server/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/server/vendor/spomky-labs/base64url" />
-      <path value="$PROJECT_DIR$/server/vendor/psr/http-factory" />
-      <path value="$PROJECT_DIR$/server/vendor/spomky-labs/pki-framework" />
-      <path value="$PROJECT_DIR$/server/vendor/psr/http-client" />
-      <path value="$PROJECT_DIR$/server/vendor/brick/math" />
       <path value="$PROJECT_DIR$/server/vendor/catfan/medoo" />
-      <path value="$PROJECT_DIR$/server/vendor/phroute/phroute" />
-      <path value="$PROJECT_DIR$/server/vendor/symfony/deprecation-contracts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

@@ -18,9 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers:  {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 
-define('SECRET_KEY','878JHdD89yd4DUdb7ysfN63dnYDbofs');
-define('ALGORITHM','HS256');
-
 require 'vendor/autoload.php';
 
 use Medoo\Medoo;
@@ -51,7 +48,7 @@ $method = $parametros[0];
 
 $permissoes = [
     "comprador" => ['DepositarMoney', 'GetMoney', 'RetirarMoney', 'GetLanche','GetLanches', 'FazerPedido'],
-    "Vendedor" => ['CreateLanche','UpdateLanche', 'DeleteLanche', 'GetPedidos'],
+    "Vendedor" => ['CreateLanche','UpdateLanche', 'DeleteLanche', 'GetPedidos', 'limparPedidos'],
 ];
 
 define('CLIENTE_ID', 1);
@@ -68,7 +65,7 @@ function setRota($funcao){
     if (!empty($_POST)) {
         $data = json_encode($funcao($_POST));
     } elseif (!empty(file_get_contents('php://input'))) {
-		$data = json_encode($funcao(json_decode(file_get_contents('php://input'), true)));
+        $data = json_encode($funcao(json_decode(file_get_contents('php://input'), true)));
     } else {
         $data = json_encode($funcao());
     }
@@ -77,11 +74,26 @@ function setRota($funcao){
 
 }
 
-//$rt = DepositarMoney(["cliente_id" => 1, "valor" => 10]);
-//print_r($rt);
+function limparPedidos($dataf){
+
+    global  $database;
+
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
+
+    $database->delete('pedidos', []);
+
+    return ['ok' => true];
+}
 
 function DepositarMoney($dataf){
+
     global  $database;
+
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
 
     $validacoes = [
         "valor" => ["type" => "numeric", "required" => false],
@@ -117,9 +129,13 @@ function DepositarMoney($dataf){
 //$rt = GetMoney();
 //print_r($rt);
 
-function GetMoney(){
+function GetMoney($dataf = null){
 
     global  $database;
+
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
 
     $saldo = $database->get("clientes", "saldo", ['cliente_id' => CLIENTE_ID]);
 
@@ -140,7 +156,12 @@ function GetMoney(){
 //print_r($rt);
 
 function RetirarMoney($dataf){
+
     global  $database;
+
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
 
     $validacoes = [
         "valor" => ["type" => "numeric", "required" => false],
@@ -183,6 +204,10 @@ function GetLanche($dataf){
 
     global  $database;
 
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
+
     $validacoes = [
         "lanche_id" => ["type" => "numeric", "required" => false],
     ];
@@ -215,11 +240,15 @@ function GetLanche($dataf){
 //$rt = GetLanches();
 //echo json_encode($rt);
 
-function GetLanches(){
+function GetLanches($dataf = null){
 
     global  $database;
 
-    $lanches = $database->select("lanche", "*");
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
+
+    $lanches = $database->select("lanche", "*", ["ORDER" => ["lanche_id" => "DESC"]]);
 
     if($database->errorInfo){
         error_log(implode(', ', $database->errorInfo));
@@ -241,6 +270,10 @@ function FazerPedido($dataf){
 
     global  $database;
 
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
+
     $validacoes = [
         "lanches" => ["type" => "list"]
     ];
@@ -259,6 +292,11 @@ function FazerPedido($dataf){
     $lanches = $data['lanches'];
     foreach($lanches as $lanche){
         $lanche['pedido_id'] = $pedido_id;
+        $lanche_id = $lanche['lanche_id'];
+        $quantDispo = $lanche['quantDispo'];
+        $quantDispo_bd = GetLanche(["lanche_id" => $lanche_id])['lanche']['quantDispo'];
+        $novo_valor = $quantDispo_bd - $quantDispo;
+        $database->update("lanche", ["quantDispo" => $novo_valor], ["lanche_id" => $lanche_id]);
         $database->insert('pedido_lanches', $lanche);
     }
 
@@ -266,12 +304,18 @@ function FazerPedido($dataf){
 
 }
 
+
+
 //$rt = DeleteLanche(['lanche_id' =>  3]);
 //echo json_encode($rt);
 
 function DeleteLanche($dataf){
 
     global  $database;
+
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
 
     $validacoes = [
         "lanche_id" => ["type" => "numeric"],
@@ -295,24 +339,30 @@ function DeleteLanche($dataf){
 //$rt = GetPedidos();
 //echo json_encode($rt);
 
-function GetPedidos(){
+function GetPedidos($dataf = null){
 
     global  $database;
 
-    $pedidos_ids = $database->select("pedidos", "pedido_id");
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
+
+    $pedidos_ids = $database->select("pedidos", "pedido_id", ["ORDER" => ["pedido_id" => "DESC"]]);
     $pedidos = [];
 
     foreach($pedidos_ids as $pedido_id){
-        $lanches_ids = $database->select("pedido_lanches", "lanche_id", ['pedido_id' => $pedido_id]);
+        $lanches_bd = $database->select("pedido_lanches", ['lanche_id', 'quantDispo'], ['pedido_id' => $pedido_id]);
         $pedido = [];
         $lanches = [];
         $pedido['pedido_id'] = $pedido_id;
-        foreach($lanches_ids as $lanche_id){
+        foreach($lanches_bd as $lanche_bd){
+            $lanche_id = $lanche_bd['lanche_id'];
             $lanche = $database->get("lanche", "*", ['lanche_id' => $lanche_id]);
-            array_push($lanches, $lanche);
+            $lanche['quantDispo'] = $lanche_bd['quantDispo'];
+            $lanches[] = $lanche;
         }
         $pedido['lanches'] = $lanches;
-        array_push($pedidos, $pedido);
+        $pedidos[] = $pedido;
     }
 
     return ['ok' => true, 'pedidos' => $pedidos];
@@ -325,6 +375,10 @@ function GetPedidos(){
 function CreateLanche($dataf){
 
     global  $database;
+
+    if($dataf['debug'] ==  true){
+        return debug();
+    }
 
     $validacoes = [
         "nome" => ["type" => "string"],
@@ -384,8 +438,9 @@ function UploadFile($id){
         return ['ok' => false, "message" => "Erro ao processar o arquivo", 'code' => -1];
     }
 
-    return ['ok' => true, 'url' => "https://terciodelivery.robertogram.com.br/arquivos/$id.$extensao"];
+    return ['ok' => true, 'url' => "https://terciodelivery.robertogram.com.br/api/arquivos/$id.$extensao"];
 }
+
 
 function validarDados($validacoes, $dataf) {
 
@@ -431,5 +486,36 @@ function validarDados($validacoes, $dataf) {
 
     return ['ok' => true, 'dados' => $dadosValidados];
 }
+
+
+function debug() {
+
+
+    $headers = array(
+        'SERVER_NAME' => $_SERVER['SERVER_NAME'],
+        'REMOTE_ADDR' => $_SERVER['REMOTE_ADDR'],
+        'SERVER_PORT' => $_SERVER['SERVER_PORT'],
+        'REDIRECT_URL' => $_SERVER['REDIRECT_URL'],
+        'HTTP_METHOD' => $_SERVER['REQUEST_METHOD'],
+        'ACCEPT_HEADER' => $_SERVER['HTTP_ACCEPT']
+    );
+
+    $redUrl = $_SERVER['REDIRECT_URL'];
+
+    $url = "https://terciodelivery.robertogram.com.br$redUrl";
+    $body = file_get_contents('php://input');
+    $body = json_decode($body, true) ?? null;
+    if($body == null){
+        $body =  $_POST + $_FILES;
+    }
+    unset($body['debug']);
+    $data = json_encode($body);
+    $script = "curl -X POST -H 'Content-Type: application/json' -d '$data' $url";
+
+
+
+    return ['ok' => true, 'headers' => $headers, 'body' => $body, 'curl' => $script];
+}
+
 
 ?>
