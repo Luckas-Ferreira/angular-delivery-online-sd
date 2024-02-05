@@ -42,9 +42,13 @@
 <h1 align="center">
   <img alt="demonstração" title="#NextLevelWeek" src="/demo-img/example1.png" />
 </h1>
-<hr>
 <h1 align="center">
   <img alt="demonstração" title="#NextLevelWeek" src="/demo-img/example2.png" />
+</h1>
+
+### Diagrama UML
+<h1 align="center">
+  <img alt="demonstração" title="#NextLevelWeek" src="/demo-img/DiagramaUML.png" />
 </h1>
 
 #### Acesse:
