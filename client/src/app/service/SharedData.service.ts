@@ -12,8 +12,6 @@ export class SharedDataService {
     constructor() { }
   
     changeLanches(lanches: Lanche[]) {
-        console.log(lanches);
-        
       this.lancheSource.next(lanches);
     }
 }

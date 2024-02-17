@@ -129,7 +129,6 @@ export class HomeComponent implements OnInit{
   adicionar(){
     if(this.quantSelect.get('quantSelected')!.valid){
       if (this.selectedLanche.quantDispo > 0) {
-        console.log(this.selectedLanche.quantDispo);
         if(this.selectedLanche.quantDispo >= this.quantSelect.get('quantSelected')!.value){
           this.selectedLanche.quantDispo = this.selectedLanche.quantDispo - this.quantSelect.get('quantSelected')!.value;
           this.selectedLanche.quantSelect = this.quantSelect.get('quantSelected')!.value;
