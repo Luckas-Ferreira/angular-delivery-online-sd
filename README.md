@@ -42,9 +42,13 @@
 <h1 align="center">
   <img alt="demonstração" title="#NextLevelWeek" src="/demo-img/example1.png" />
 </h1>
-<hr>
 <h1 align="center">
   <img alt="demonstração" title="#NextLevelWeek" src="/demo-img/example2.png" />
+</h1>
+
+### Diagrama UML
+<h1 align="center">
+  <img alt="demonstração" title="#NextLevelWeek" src="/demo-img/DiagramaUML.png" />
 </h1>
 
 #### Acesse:
@@ -116,43 +120,57 @@ Este guia fornece instruções detalhadas para a instalação e configuração d
 
 2. **Instale o Node.js:**
    - Após a instalação, verifique com o seguinte comando no terminal:
-     ```bash
-     node -v
-     ```
+   ```bash
+     node -v
+     ```
 
 #### Instalação do Angular
 
 1. **Instalação:**
    - Acesse [o site oficial do Angular na tela de instalação](https://angular.io/guide/setup-local), ou execute o seguinte comando no terminal.
-    ```bash
-     npm install -g @angular/cli@16.0.0
-    ```
+    ```bash
+     npm install -g @angular/cli@16.0.0
+     ```
    - Perceba que usamos a tag '-g', isso indica que estamos instalando o Angular globalmente, em toda a máquina.
    - Perceba que instalamos a versão 16.0.0, pois o projeto foi desenvolvido nesta versão.
 
-2. **Instalando dependências.**
+
+3. **Instalando dependências.**
    - Após clonar este repositório, entre na pasta com o seguinte comando:
-     ```bash
-     cd cliente/
-     ```
+   ```bash
+     cd cliente/
+   ```
    - Agora, execute o seguinte comando:
-     ```bash
-     npm install
-     ```
+   ```bash
+     npm install
+   ```
    - Com isso, todas as dependências serão baixadas.
 
-3. **Execução, modo desenvolvimento:**
+
+5. **Execução, modo desenvolvimento:**
    - Para executar em modo de desenvolvimento, execute o seguinte comando:
-     ```bash
-     ng server
-     ```
+   ```bash
+     ng server
+   ```
 
-4. **Build, modo produção:**
+
+6. **Build, modo produção:**
    - Para fazer o Build em modo produção, execute o seguinte comando:
-     ```bash
-     ng build --aot --configuration=production
-     ```
+   ```bash
+     ng build --aot --configuration=production
+   ```
+#
 
+### ❓ Como um cliente non-browser chamaria um web service?
+
+- O cliente pode realizar chamadas HTTP diretamente, utilizando métodos como GET, POST, PUT ou DELETE, conforme especificado pelo serviço REST, o qual é independente de um navegador. Na verdade, o navegador é apenas mais uma tecnologia/software que se utiliza da comunicação via HTTP. Em nossa implementação, fazemos uso da ferramenta de linha de comando cURL. Ao habilitar a opção de depuração no site, um comando cURL é exibido para consumir a requisição em questão, que pode ser executada diretamente num terminal linux.
+- O cURl vem instalado por padrão na maioria das distribuições Linux, mas caso não tenha o cURL instalado, execute o comando abaixo:
+  
+   ```bash
+     sudo apt install curl
+   ```
+
+#
 ### 🛠 Tecnologia
 
 A seguinte ferramenta foi usada na construção do projeto:
@@ -160,6 +178,7 @@ A seguinte ferramenta foi usada na construção do projeto:
 - [Angular 16.0.0](https://angular.io/)
 - [PHP 8.2.15](https://www.php.net/)
 - [Banco de dados - MariaDB](https://mariadb.org/)
+- [cURL](https://curl.se/)
 ### 
 - [Composer](https://getcomposer.org/)
 - [Medoo](https://medoo.in/)
