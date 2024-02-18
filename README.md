@@ -163,12 +163,7 @@ Este guia fornece instruções detalhadas para a instalação e configuração d
 
 ### ❓ Como um cliente non-browser chamaria um web service?
 
-- O cliente pode realizar chamadas HTTP diretamente, utilizando métodos como GET, POST, PUT ou DELETE, conforme especificado pelo serviço REST, o qual é independente de um navegador. Na verdade, o navegador é apenas mais uma tecnologia/software que se utiliza da comunicação via HTTP. Em nossa implementação, fazemos uso da ferramenta de linha de comando cURL. Ao habilitar a opção de depuração no site, um comando cURL é exibido para consumir a requisição em questão, que pode ser executada diretamente num terminal linux.
-- O cURl vem instalado por padrão na maioria das distribuições Linux, mas caso não tenha o cURL instalado, execute o comando abaixo:
-  
-   ```bash
-     sudo apt install curl
-   ```
+- O cliente pode realizar chamadas HTTP diretamente, utilizando métodos como GET, POST, PUT ou DELETE, conforme especificado pelo serviço REST, o qual é independente de um navegador. Na verdade, o navegador é apenas mais uma tecnologia/software que se utiliza da comunicação via HTTP.  o arquivo  `/Non-Browser/Non-Browser.py` tem um código em `python` junto com a biblioteca `resquest` para consumir algumas das API's do sistema.
 
 #
 ### 🛠 Tecnologia
